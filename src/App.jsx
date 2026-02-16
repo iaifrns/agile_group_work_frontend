@@ -1,13 +1,12 @@
-import './App.css'
+import Login from "./authentification/login"
+
 
 function App() {
 
+  const list = Array(10).fill(1)
   return (
     <>
-      <h1>Agile group work frontend page</h1>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Login/>
     </>
   )
 }
