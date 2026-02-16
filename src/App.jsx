@@ -1,12 +1,11 @@
 import Login from "./authentification/login"
+import Registration from "./authentification/registration"
 
 
 function App() {
-
-  const list = Array(10).fill(1)
   return (
     <>
-      <Login/>
+      <Registration/>
     </>
   )
 }

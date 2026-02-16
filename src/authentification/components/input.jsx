@@ -1,6 +1,6 @@
 import "../login.css";
 
-const CustomInput = ({ Icon, label, placeholder }) => {
+const CustomInput = ({ Icon, label, placeholder, type }) => {
   return (
     <div class="form-group">
       <label for="email">{label}</label>
@@ -9,7 +9,7 @@ const CustomInput = ({ Icon, label, placeholder }) => {
           <Icon />
         </span>
         <input
-          type="email"
+          type= {(type) ? type: 'text'}
           id="email"
           placeholder={placeholder}
           required

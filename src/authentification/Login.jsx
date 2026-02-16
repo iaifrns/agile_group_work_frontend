@@ -31,6 +31,7 @@ const Login = () => {
             Icon={Mail}
             label={"Email Address:"}
             placeholder={"student@aber.ac.uk"}
+            type={'email'}
           />
 
           <CustomInputPassword
