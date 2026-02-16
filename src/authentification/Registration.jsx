@@ -6,8 +6,10 @@ import PasswordIcon from "../assets/icons/password";
 import { CustomButton } from "./components/button";
 import Person from "../assets/icons/person";
 import Phone from "../assets/icons/phone";
+import { useNavigate } from "react-router-dom";
 
 const Registration = () => {
+  const navigateTo = useNavigate()
   return (
     <div class="container">
       <div class="right-side">
@@ -53,7 +55,7 @@ const Registration = () => {
         </form>
 
         <div class="signup-link">
-          Already have an account? <a href="create_account.html">Sign In</a>
+          Already have an account? <a onClick={()=>navigateTo('/login')}>Sign In</a>
         </div>
       </div>
       <div class="left-side">

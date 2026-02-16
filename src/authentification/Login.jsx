@@ -4,8 +4,16 @@ import Mail from "../assets/icons/mail";
 import CustomInput, { CustomInputPassword } from "./components/input";
 import PasswordIcon from "../assets/icons/password";
 import { CustomButton } from "./components/button";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const navigateTo = useNavigate()
+
+  const submit = () => {
+    navigateTo('/profile')
+  }
+
   return (
     <div class="container">
       <div class="left-side">
@@ -40,11 +48,11 @@ const Login = () => {
             placeholder={"********"}
           />
 
-          <CustomButton text={"Login"} />
+          <CustomButton text={"Login"} submit={submit} />
         </form>
 
         <div class="signup-link">
-          Don't have an account? <a href="create_account.html">Sign Up</a>
+          Don't have an account? <a onClick={()=>navigateTo('/register')}>Sign Up</a>
         </div>
       </div>
     </div>

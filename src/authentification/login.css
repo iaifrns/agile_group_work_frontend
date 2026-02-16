@@ -37,6 +37,10 @@ body {
   text-align: center;
 }
 
+a {
+  cursor: pointer;
+}
+
 .illustration {
   margin-bottom: 40px;
   text-align: center;
