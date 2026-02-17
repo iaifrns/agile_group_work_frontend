@@ -1,6 +1,14 @@
 import "../login.css";
 
-const CustomInput = ({ Icon, label, placeholder, type }) => {
+const CustomInput = ({
+  Icon,
+  label,
+  placeholder,
+  type,
+  value,
+  setValue,
+  error,
+}) => {
   return (
     <div class="form-group">
       <label for="email">{label}</label>
@@ -9,17 +17,27 @@ const CustomInput = ({ Icon, label, placeholder, type }) => {
           <Icon />
         </span>
         <input
-          type= {(type) ? type: 'text'}
+          type={type ? type : "text"}
           id="email"
           placeholder={placeholder}
           required
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
         />
       </div>
+      <p className="error_message">{error}</p>
     </div>
   );
 };
 
-export const CustomInputPassword = ({ Icon, label, placeholder }) => {
+export const CustomInputPassword = ({
+  Icon,
+  label,
+  placeholder,
+  value,
+  setValue,
+  error,
+}) => {
   return (
     <div class="form-group">
       <label for="password">{label}</label>
@@ -27,8 +45,16 @@ export const CustomInputPassword = ({ Icon, label, placeholder }) => {
         <span class="mail-icon">
           <Icon />
         </span>
-        <input type="password" id="password" placeholder={placeholder} required />
+        <input
+          type="password"
+          id="password"
+          placeholder={placeholder}
+          required
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+        />
       </div>
+      <p className="error_message">{error}</p>
     </div>
   );
 };
