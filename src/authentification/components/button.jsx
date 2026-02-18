@@ -16,3 +16,4 @@ const CustomButton = ({ text, submit, status }) => {
 };
 
 export { CustomButton };
+
