@@ -9,6 +9,8 @@ import Phone from "../assets/icons/phone";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { registerInputCheck } from "./services/inputCheck";
+import { responseStatus } from "../assets/enum/responseStatus";
+import { registerUser } from "./services/register";
 
 const Registration = () => {
   const navigateTo = useNavigate();
@@ -35,14 +37,29 @@ const Registration = () => {
       error: "",
     },
   });
+  const [status, setStatus] = useState("");
+  const [error, setError] = useState("");
 
   const submit = () => {
-    let isDataOk = registerInputCheck(registerData, setRegisterData)
+    let isDataOk = registerInputCheck(registerData, setRegisterData);
 
-    if(isDataOk){
-      navigateTo('/login')
+    if (isDataOk) {
+      registerUser(
+        {
+          firstName: registerData.firstName.value,
+          lastName: registerData.secondName.value,
+          email: registerData.email.value,
+          password: registerData.password.value,
+          phoneNumber: registerData.phoneNumber.value,
+        },
+        setError,
+        setStatus,
+      );
+      if(status == responseStatus.SUCCESS){
+        navigateTo('/profile')
+      }
     }
-  }
+  };
 
   return (
     <div class="container">
@@ -52,7 +69,7 @@ const Registration = () => {
         <p class="subtitle">
           Enter the information below to create your account
         </p>
-
+        <p className="error_message1">{error}</p>
         <div id="loginForm">
           <div className="name">
             <CustomInput
@@ -125,7 +142,11 @@ const Registration = () => {
             error={registerData.password.error}
           />
 
-          <CustomButton text={"Create Account"} submit={submit} />
+          <CustomButton
+            text={"Create Account"}
+            submit={submit}
+            status={status}
+          />
         </div>
 
         <div class="signup-link">

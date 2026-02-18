@@ -186,6 +186,14 @@ input:focus {
   margin-top: 24px;
 }
 
+.btn:disabled{
+  background-color: #72767d;
+}
+
+.btn:disabled:hover{
+  background-color: #131517;
+}
+
 .btn-primary {
   background: #5865f2;
   color: white;
@@ -215,6 +223,12 @@ input:focus {
 .error_message{
   font-size: 10px;
   color: red;
+}
+
+.error_message1{
+  font-size: 12px;
+  color: red;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
