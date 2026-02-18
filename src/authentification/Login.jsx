@@ -7,6 +7,7 @@ import { CustomButton } from "./components/button";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginInputCheck } from "./services/inputCheck";
+import { loginApiUrl } from "../constants/endpoints";
 
 const Login = () => {
   const navigateTo = useNavigate();
@@ -22,11 +23,22 @@ const Login = () => {
     },
   });
 
-  const submit = () => {
-    const isDataOk = loginInputCheck(loginData, setLoginData)
+  const [status, setStatus] = useState();
+  const [errMess, setErrMes] = useState("");
 
-    if(isDataOk) {
-      navigateTo('/profile')
+  const submit = () => {
+    const isDataOk = loginInputCheck(loginData, setLoginData);
+
+    if (isDataOk) {
+      loginApiUrl(
+        {
+          email: loginData.email.value,
+          password: loginData.password.value,
+        },
+        setErrMes,
+        setStatus,
+      );
+      navigateTo("/profile");
     }
   };
 
@@ -49,7 +61,7 @@ const Login = () => {
         <p class="subtitle">
           Enter your email address and password to access admin panel.
         </p>
-
+        <p className="error_message1">{errMess}</p>
         <div id="loginForm">
           <CustomInput
             Icon={Mail}
@@ -79,7 +91,7 @@ const Login = () => {
             error={loginData.password.error}
           />
 
-          <CustomButton text={"Login"} submit={submit} />
+          <CustomButton text={"Login"} submit={submit} status={status} />
         </div>
 
         <div class="signup-link">

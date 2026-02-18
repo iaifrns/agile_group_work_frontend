@@ -1,8 +1,7 @@
-import React from 'react';
 
 const ProfilePage = () => {
     return (
-        <div>
+        <div style={{color:'white'}}>
             Profile page
         </div>
     );

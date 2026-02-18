@@ -1,19 +1,18 @@
 import axios from "axios";
-import { registerApiUrl } from "../../constants/endpoints";
 import { responseStatus } from "../../assets/enum/responseStatus";
+import { loginApiUrl } from "../../constants/endpoints";
 import { useContext } from "react";
 import { Context } from "../../hooks/useContext";
 
-const registerUser = async (data, setErrMess, setStatus) => {
+const loginUser = async (data, setErrMess, setStatus) => {
   const { handleId } = useContext(Context);
-
   try {
     setStatus(responseStatus.PENDING);
-    const response = await axios.post(registerApiUrl, data);
-    if (response.data.error) {
-      setErrMess(response.data.error);
-    } else {
-      handleId(response.data.data.id);
+    const response = await axios.post(loginApiUrl, data);
+    if(response.data.data){
+        handleId(response.data.data.id)
+    }else{
+        setErrMess(response.data.error)
     }
     setStatus(responseStatus.SUCCESS);
   } catch (e) {
@@ -23,4 +22,4 @@ const registerUser = async (data, setErrMess, setStatus) => {
   }
 };
 
-export { registerUser };
+export { loginUser };
