@@ -5,7 +5,7 @@ import PasswordIcon from "../assets/icons/password";
 import pana from "../assets/pana.svg";
 import { CustomButton } from "./components/button";
 import CustomInput, { CustomInputPassword } from "./components/input";
-import "./login.css";
+import "./css/login.css";
 import { loginInputCheck } from "./services/inputCheck";
 import { loginUser } from "./services/login";
 import { Context } from "../hooks/useContext";

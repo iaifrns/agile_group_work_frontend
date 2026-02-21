@@ -1,4 +1,4 @@
-import "../login.css";
+import "../css/login.css";
 
 const CustomInput = ({
   Icon,

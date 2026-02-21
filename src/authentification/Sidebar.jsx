@@ -1,5 +1,4 @@
-import React from "react";
-import "./Sidebar.css";
+import "./css/Sidebar.css";
 
 const icons = ["Group 1.png","Group 3.png","Group 4.png","Group 5.png","Group 6.png","Group 7.png"];
 

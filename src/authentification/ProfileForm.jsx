@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./ProfileForm.css";
+import "./css/ProfileForm.css";
 import { logout } from "./services/logout";
 import { responseStatus } from "../assets/enum/responseStatus";
 import Loader from "../assets/icons/loader";

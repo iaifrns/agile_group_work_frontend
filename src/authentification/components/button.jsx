@@ -1,6 +1,6 @@
 import { responseStatus } from "../../assets/enum/responseStatus";
 import Loader from "../../assets/icons/loader";
-import "../login.css";
+import "../css/login.css";
 
 const CustomButton = ({ text, submit, status }) => {
   return (

@@ -7,7 +7,7 @@ import Phone from "../assets/icons/phone";
 import pana from "../assets/pana1.svg";
 import { CustomButton } from "./components/button";
 import CustomInput, { CustomInputPassword } from "./components/input";
-import "./login.css";
+import "./css/login.css";
 import { registerInputCheck } from "./services/inputCheck";
 import { registerUser } from "./services/register";
 

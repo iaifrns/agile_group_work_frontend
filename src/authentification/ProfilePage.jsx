@@ -1,9 +1,9 @@
 import Sidebar from "../authentification/Sidebar";
 import Topbar from "../authentification/Topbar";
-import Banner from "../authentification/Banner";
+import Banner from "./Banner";
 import ProfileForm from "../authentification/ProfileForm";
 
-import "./ProfilePage.css";
+import "./css/ProfilePage.css";
 
 const ProfilePage = () => (
   <div className="app">

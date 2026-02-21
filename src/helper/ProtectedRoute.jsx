@@ -8,9 +8,7 @@ const ProtectedRoute = ({children}) => {
     if(!id){
         return <Navigate to={'/login'} replace />
     }
-    return (
-        {children}
-    );
+    return <>{children}</>;
 }
 
 export default ProtectedRoute;
