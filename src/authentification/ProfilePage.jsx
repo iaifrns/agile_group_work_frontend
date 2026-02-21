@@ -10,8 +10,10 @@ const ProfilePage = () => (
     <Sidebar />
     <main className="main">
       <Topbar />
-      <Banner />
-      <ProfileForm />
+      <div className="scroll">
+        <Banner />
+        <ProfileForm />
+      </div>
     </main>
   </div>
 );
