@@ -36,6 +36,7 @@ const Registration = () => {
       error: "",
     },
   });
+  
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
 
