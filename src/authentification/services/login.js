@@ -1,16 +1,14 @@
 import axios from "axios";
 import { responseStatus } from "../../assets/enum/responseStatus";
 import { loginApiUrl } from "../../constants/endpoints";
-import { useContext } from "react";
-import { Context } from "../../hooks/useContext";
 
-const loginUser = async (data, setErrMess, setStatus) => {
-  const { handleId } = useContext(Context);
+const loginUser = async (data, setErrMess, setStatus, handleId, navigate) => {
   try {
     setStatus(responseStatus.PENDING);
     const response = await axios.post(loginApiUrl, data);
     if(response.data.data){
         handleId(response.data.data.id)
+        navigate('/profile')
     }else{
         setErrMess(response.data.error)
     }
@@ -23,3 +21,4 @@ const loginUser = async (data, setErrMess, setStatus) => {
 };
 
 export { loginUser };
+

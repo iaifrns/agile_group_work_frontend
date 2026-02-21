@@ -1,10 +1,10 @@
 import axios from "axios";
-import { registerApiUrl } from "../../constants/endpoints";
-import { responseStatus } from "../../assets/enum/responseStatus";
 import { useContext } from "react";
+import { responseStatus } from "../../assets/enum/responseStatus";
+import { registerApiUrl } from "../../constants/endpoints";
 import { Context } from "../../hooks/useContext";
 
-const registerUser = async (data, setErrMess, setStatus) => {
+const registerUser = async (data, setErrMess, setStatus, navigateTo) => {
   const { handleId } = useContext(Context);
 
   try {
@@ -14,6 +14,7 @@ const registerUser = async (data, setErrMess, setStatus) => {
       setErrMess(response.data.error);
     } else {
       handleId(response.data.data.id);
+      navigateTo("/profile");
     }
     setStatus(responseStatus.SUCCESS);
   } catch (e) {
