@@ -1,21 +1,7 @@
-import React, { useContext, useState } from "react";
-import "./css/ProfileForm.css";
-import { logout } from "./services/logout";
-import { responseStatus } from "../assets/enum/responseStatus";
-import Loader from "../assets/icons/loader";
-import { useNavigate } from "react-router-dom";
-import { Context } from "../hooks/useContext";
-import { CustomButton } from "./components/button";
+import React from "react";
+import "./ProfileForm.css";
 
 const ProfileForm = () => {
-  const [status, setStatus] = useState();
-  const { handleId } = useContext(Context);
-  const navigateTo = useNavigate();
-  const submit = () => {
-    if (status != responseStatus.PENDING) {
-      logout(setStatus, navigateTo, handleId);
-    }
-  };
   return (
     <section className="profile">
       <div className="profile-inner">
@@ -23,12 +9,13 @@ const ProfileForm = () => {
           <div className="avatar">
             <img src="Group 1000004098.png" alt="avatar" />
           </div>
-          <h2>Profile</h2>
+          <div className="user-info">
+            <h2 className="username">Username</h2>
+            <p className="group-number">Group Number: 7</p>
+          </div>
           <div className="actions">
-            <button className="btn cancel" onClick={submit}>
-              {status == responseStatus.PENDING ? <Loader /> : <>Logout</>}
-            </button>
-            <CustomButton text={'Update'} />
+            <button className="btn cancel">Cancel</button>
+            <button className="btn save">Save</button>
           </div>
         </div>
       </div>

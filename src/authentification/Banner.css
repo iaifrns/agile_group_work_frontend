@@ -1,0 +1,9 @@
+.banner {
+    height: 160px;
+    padding: 16px;
+}
+
+.banner img {
+    height: 160px;
+    width: 100%;
+}
