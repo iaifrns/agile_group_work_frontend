@@ -1,5 +1,4 @@
 import { createContext, useState } from "react";
-import { checkToken } from "../helper/checkToken";
 
 export const Context = createContext();
 
