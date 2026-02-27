@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const Context = createContext();
+export const Context = createContext({ id: "", handleId: (e) => {} });
 
 const ContextProvider = ({ children }) => {
   const [id, setId] = useState("");
@@ -14,4 +14,4 @@ const ContextProvider = ({ children }) => {
   );
 };
 
-export default ContextProvider
+export default ContextProvider;

@@ -1,7 +1,7 @@
-import Sidebar from "../authentification/Sidebar";
-import Topbar from "../authentification/Topbar";
+import Sidebar from "./Sidebar";
+import Topbar from "./Topbar";
 import Banner from "./Banner";
-import ProfileForm from "../authentification/ProfileForm";
+import ProfileForm from "./ProfileForm";
 
 import "./css/ProfilePage.css";
 

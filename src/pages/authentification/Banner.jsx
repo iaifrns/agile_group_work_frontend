@@ -5,6 +5,7 @@ const Banner = () => {
     <section className="banner">
       <img src="Mask group.png" alt="banner" />
     </section>
+  
   );
 };
 
