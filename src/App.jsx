@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "./pages/authentification/login";
 import ProfilePage from "./pages/authentification/ProfilePage";
-import Registration from "./pages/authentification/registration";
 import Authlayout from "./layout/AuthLayout";
 import ProtectedRoute from "./helper/ProtectedRoute";
+import Login from "./pages/authentification/Login";
+import Registration from "./pages/authentification/Registration";
 
 function App() {
   return (
