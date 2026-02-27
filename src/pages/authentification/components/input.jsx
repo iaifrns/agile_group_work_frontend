@@ -1,34 +1,60 @@
 import "../css/login.css";
 
-const CustomInput = ({ Icon, label, placeholder, type }) => {
+const CustomInput = ({
+  Icon,
+  label,
+  placeholder,
+  type,
+  value,
+  onChange,
+  e,
+}) => {
   return (
-    <div class="form-group">
+    <div className="form-group">
       <label for="email">{label}</label>
-      <div class="input-wrapper">
-        <span class="mail-icon">
+      <div className="input-wrapper">
+        <span className="mail-icon">
           <Icon />
         </span>
         <input
-          type= {(type) ? type: 'text'}
+          type={type ? type : "text"}
           id="email"
           placeholder={placeholder}
           required
+          value={value}
+          onChange={onChange}
         />
       </div>
+      <p className="error_message">{e}</p>
     </div>
   );
 };
 
-export const CustomInputPassword = ({ Icon, label, placeholder }) => {
+export const CustomInputPassword = ({
+  Icon,
+  label,
+  placeholder,
+  value,
+  onChange,
+  e,
+}) => {
   return (
-    <div class="form-group">
+    <div className="form-group">
       <label for="password">{label}</label>
-      <div class="input-wrapper password-wrapper">
-        <span class="mail-icon">
+      <div className="input-wrapper password-wrapper">
+        <span className="mail-icon">
           <Icon />
         </span>
-        <input type="password" id="password" placeholder={placeholder} required />
+        <input
+          type="password"
+          id="password"
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          required
+        />
       </div>
+      <p className="error_message">{e}</p>
     </div>
   );
 };

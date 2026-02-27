@@ -11,15 +11,15 @@ import { useNavigate } from "react-router-dom";
 const Registration = () => {
   const navigateTo = useNavigate()
   return (
-    <div class="container">
-      <div class="right-side">
+    <div className="container">
+      <div className="right-side">
         <h2>Student Group Work</h2>
-        <p class="h1">Welcome to the account page!</p>
-        <p class="subtitle">
+        <p className="h1">Welcome to the account page!</p>
+        <p className="subtitle">
           Enter the information below to create your account
         </p>
 
-        <form id="loginForm">
+        <div id="loginForm">
           <div className="name">
             <CustomInput
               Icon={Person}
@@ -52,14 +52,14 @@ const Registration = () => {
           />
 
           <CustomButton text={"Create Account"} />
-        </form>
+        </div>
 
-        <div class="signup-link">
+        <div className="signup-link">
           Already have an account? <a onClick={()=>navigateTo('/login')}>Sign In</a>
         </div>
       </div>
-      <div class="left-side">
-        <div class="illustration">
+      <div className="left-side">
+        <div className="illustration">
           <img src={pana} alt="Security Illustration" />
         </div>
         <h1>

@@ -1,11 +1,12 @@
 import axios from "axios";
-import { responseStatus } from "../../assets/enum/responseStatus";
-import { loginApiUrl } from "../../constants/endpoints";
+import { responseStatus } from "../../../assets/enum/responseStatus";
+import { loginApiUrl } from "../../../constants/endpoints";
 
 const loginUser = async (data, setErrMess, setStatus, handleId, navigate) => {
   try {
     setStatus(responseStatus.PENDING);
     const response = await axios.post(loginApiUrl, data);
+    console.log(response)
     if(response.data.data){
         handleId(response.data.data.id)
         navigate('/profile')
