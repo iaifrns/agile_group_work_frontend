@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Context } from "../hooks/useContext";
 import { checkToken } from "../helper/checkToken";
+import "../pages/authentification/css/login.css"
 
 const AuthLayout = () => {
   const { id , handleId} = useContext(Context);
@@ -15,7 +16,7 @@ const AuthLayout = () => {
   }, []);
 
   return (
-    <div>
+    <div className="body">
       <Outlet />
     </div>
   );
