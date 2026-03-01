@@ -4,7 +4,7 @@ import { Context } from '../hooks/useContext';
 
 const ProtectedRoute = ({children}) => {
     const {id} = useContext(Context)
-
+console.log(id,'here is the protection')
     if(!id){
         return <Navigate to={'/login'} replace />
     }
