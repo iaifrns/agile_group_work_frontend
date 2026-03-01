@@ -4,25 +4,28 @@ import Authlayout from "./layout/AuthLayout";
 import ProtectedRoute from "./helper/ProtectedRoute";
 import Login from "./pages/authentification/Login";
 import Registration from "./pages/authentification/Registration";
+import ContextProvider from "./hooks/useContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<Authlayout />} path="/">
-          <Route element={<Login />} path="/login" />
-          <Route element={<Registration />} path="/register" />
-        </Route>
-        <Route
-          element={
-            <ProtectedRoute>
-              <ProfilePage />
-            </ProtectedRoute>
-          }
-          path="/profile"
-        />
-      </Routes>
-    </BrowserRouter>
+    <ContextProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<Authlayout />} path="/">
+            <Route element={<Login />} path="/login" />
+            <Route element={<Registration />} path="/register" />
+          </Route>
+          <Route
+            element={
+              <ProtectedRoute>
+                <ProfilePage />
+              </ProtectedRoute>
+            }
+            path="/profile"
+          />
+        </Routes>
+      </BrowserRouter>
+    </ContextProvider>
   );
 }
 
