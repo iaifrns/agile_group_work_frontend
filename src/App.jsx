@@ -5,6 +5,7 @@ import ProtectedRoute from "./helper/ProtectedRoute";
 import Login from "./pages/authentification/Login";
 import Registration from "./pages/authentification/Registration";
 import ContextProvider from "./hooks/useContext";
+import GroupList from "./pages/groups/GroupList";
 
 function App() {
   return (
@@ -22,6 +23,14 @@ function App() {
               </ProtectedRoute>
             }
             path="/profile"
+          />
+          <Route
+            path="/group/list"
+            element={
+              <ProtectedRoute>
+                <GroupList />
+              </ProtectedRoute>
+            }
           />
         </Routes>
       </BrowserRouter>

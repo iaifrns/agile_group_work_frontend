@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import "./css/Sidebar.css";
+import { useNavigate } from "react-router-dom";
+import Logo from '../../assets/Group 9.png'
 
 const Menu = ({ menuInfo, active }) => {
   const [display, setDisplay] = useState(false);
+  const navigateTo = useNavigate();
   return (
     <div className="menu">
       <span
         className={`nav-item ${menuInfo.id === active.id ? "active" : ""}`}
         onMouseEnter={() => setDisplay(true)}
         onMouseLeave={() => setDisplay(false)}
+        onClick={() => navigateTo(menuInfo.path)}
       >
         <menuInfo.Icon c={menuInfo.id === active.id ? "white" : ""} />
       </span>
@@ -26,7 +30,7 @@ const Sidebar = ({ active }) => {
   return (
     <aside className="sidebar">
       <div className="logo">
-        <img src="Group 9.png" alt="logo" />
+        <img src={Logo} alt="logo" />
         <span>OCTOM.</span>
       </div>
       <nav className="nav">
