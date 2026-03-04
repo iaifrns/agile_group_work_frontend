@@ -40,8 +40,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .nav-item.active {
     background: linear-gradient(135deg, #6e7bff, #8f9bff);
+}
+
+.menu {
+    position: relative;
+}
+
+.menu .name{
+    position: absolute;
+    width: fit-content;
+    padding: 6px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.8);
+    margin-top: 4px;
+    z-index: 1;
+}
+
+.menu .name p {
+    white-space: nowrap;
 }
