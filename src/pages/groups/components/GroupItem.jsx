@@ -3,7 +3,7 @@ import { ButtonWithIconOnLeft } from "../../../components/buttons";
 import { stringToColor } from "../../../services/generateColor";
 import "../css/groupItem.css";
 
-const GroupItem = ({ name, id }) => {
+const GroupItem = ({ name, id, join }) => {
   let logo = name.slice(0, 2);
   return (
     <div className="group_item" key={id}>
@@ -11,7 +11,7 @@ const GroupItem = ({ name, id }) => {
         <p className="group_logo">{logo}</p>
       </div>
       <p className="group_name">{name}</p>
-      <ButtonWithIconOnLeft text={"Apply to Join"} Icon={LinkIcon} />
+      <ButtonWithIconOnLeft text={"Apply to Join"} Icon={LinkIcon} onclick={join} />
     </div>
   );
 };
