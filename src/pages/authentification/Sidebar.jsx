@@ -1,8 +1,28 @@
+import { useState } from "react";
+import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import "./css/Sidebar.css";
 
-const icons = ["Group 1.png","Group 2.png","Group 3.png","Group 4.png","Group 5.png","Group 6.png"];
+const Menu = ({ menuInfo, active }) => {
+  const [display, setDisplay] = useState(false);
+  return (
+    <div className="menu">
+      <span
+        className={`nav-item ${menuInfo.id === active.id ? "active" : ""}`}
+        onMouseEnter={() => setDisplay(true)}
+        onMouseLeave={() => setDisplay(false)}
+      >
+        <menuInfo.Icon c={menuInfo.id === active.id ? "white" : ""} />
+      </span>
+      {display && (
+        <div className="name">
+          <p>{menuInfo.name}</p>
+        </div>
+      )}
+    </div>
+  );
+};
 
-const Sidebar = () => {
+const Sidebar = ({ active }) => {
   return (
     <aside className="sidebar">
       <div className="logo">
@@ -10,10 +30,12 @@ const Sidebar = () => {
         <span>OCTOM.</span>
       </div>
       <nav className="nav">
-        {icons.map((icon, idx) => (
-          <span key={idx} className={`nav-item ${idx === 3 ? "active" : ""}`}>
-            <img src={icon} alt={idx + 1} />
-          </span>
+        {Object.values(ActiveSideBarMenu).map((icon, idx) => (
+          <Menu
+            menuInfo={icon}
+            key={icon.id + icon.name + idx}
+            active={active}
+          />
         ))}
       </nav>
     </aside>
