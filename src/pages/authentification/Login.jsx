@@ -55,7 +55,6 @@ const Login = () => {
           <br />
           becomes an opportunity to succeed
         </h1>
-        <p className="error_message1">{errMes}</p>
       </div>
 
       <div className="right-side">
@@ -64,7 +63,7 @@ const Login = () => {
         <p className="subtitle">
           Enter your email address and password to access admin panel.
         </p>
-
+        <p className="error_message1">{errMes}</p>
         <div id="loginForm">
           <CustomInput
             Icon={Mail}

@@ -1,6 +1,20 @@
+import { useNavigate } from "react-router-dom";
 import "./css/ProfileForm.css";
+import { useContext, useState } from "react";
+import { Context } from "../../hooks/useContext";
+import { responseStatus } from "../../assets/enum/responseStatus";
+import { logout } from "./services/logout";
 
 const ProfileForm = () => {
+
+  const navigateTo = useNavigate()
+  const {handleId} = useContext(Context)
+  const [status, setStatus] = useState()
+
+  const handleLogout = async () => {
+    await logout(setStatus, navigateTo, handleId)
+  }
+
   return (
     <section className="profile">
       <div className="profile-inner">
@@ -13,8 +27,8 @@ const ProfileForm = () => {
             <p className="group-number">Group Number: 7</p>
           </div>
           <div className="actions">
-            <button className="btn cancel">Cancel</button>
-            <button className="btn save">Save</button>
+            <button onClick={handleLogout} className="btn cancel">Logout</button>
+            <button className="btn save">update info</button>
           </div>
         </div>
       </div>
