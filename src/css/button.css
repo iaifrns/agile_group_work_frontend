@@ -1,0 +1,19 @@
+.default {
+    padding: 16px;
+    background-color: #5051F9;
+    border-radius: 8px;
+    border: 0px;
+}
+
+.button_with_icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 200px;
+}
+
+.default p {
+    color: white;
+    font-weight: bold;
+}

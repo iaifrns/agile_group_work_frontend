@@ -1,11 +1,11 @@
 import axios from "axios";
-import { responseStatus } from "../../assets/enum/responseStatus";
-import { logoutApiUrl } from "../../constants/endpoints";
+import { responseStatus } from "../../../assets/enum/responseStatus";
+import { logoutApiUrl } from "../../../constants/endpoints";
 
 export const logout = async (setStatus, navigate, handleId) => {
   try {
     setStatus(responseStatus.PENDING);
-    const response = await axios.post(logoutApiUrl);
+    const response = await axios.get(logoutApiUrl,{withCredentials: true});
     if (response.data.status) {
       handleId("");
       navigate("/login");

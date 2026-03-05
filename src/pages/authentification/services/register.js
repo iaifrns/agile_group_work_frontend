@@ -9,7 +9,7 @@ const registerUser = async (data, setErrMess, setStatus, navigateTo) => {
 
   try {
     setStatus(responseStatus.PENDING);
-    const response = await axios.post(registerApiUrl, data);
+    const response = await axios.post(registerApiUrl, data, {withCredentials:true});
     if (response.data.error) {
       setErrMess(response.data.error);
     } else {

@@ -5,7 +5,7 @@ import { loginApiUrl } from "../../../constants/endpoints";
 const loginUser = async (data, setErrMess, setStatus, handleId, navigate) => {
   try {
     setStatus(responseStatus.PENDING);
-    const response = await axios.post(loginApiUrl, data);
+    const response = await axios.post(loginApiUrl, data, {withCredentials: true});
     console.log(response)
     if(response.data.data){
         handleId(response.data.data.id)

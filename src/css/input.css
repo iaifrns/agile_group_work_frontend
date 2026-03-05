@@ -1,0 +1,26 @@
+.input_with_icon_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: #131517;
+    width: 350px;
+    border-radius: 8px;
+}
+
+.input_no_design{
+    border: 0px;
+    color: white;
+    background-color: transparent;
+    padding: 0px;
+    width: 100%;
+}
+
+.input_no_design:focus{
+    border: 0px;
+    background-color: transparent;
+}
+
+.input_no_design::placeholder{
+    color: #838383;
+}
