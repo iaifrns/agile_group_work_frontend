@@ -1,18 +1,45 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../hooks/useContext";
 import "./css/ProfileForm.css";
 import { logout } from "./services/logout";
+import Loader from "../../assets/icons/loader";
+import { responseStatus } from "../../assets/enum/responseStatus";
 
 const ProfileForm = ({ student }) => {
   const navigateTo = useNavigate();
   const { handleId, name } = useContext(Context);
   const [status, setStatus] = useState();
   const [studentCopy, setStudentCopy] = useState(student);
+  const [activateUpdateButton, setActivateUpdateButton] = useState(false);
 
   const handleLogout = async () => {
-    await logout(setStatus, navigateTo, handleId);
+    if (status != responseStatus.PENDING) {
+      await logout(setStatus, navigateTo, handleId);
+    }
   };
+
+  useEffect(() => {
+    switch (true) {
+      case student.firstName != studentCopy.firstName:
+        setActivateUpdateButton(true);
+        break;
+      case student.lastName != studentCopy.lastName:
+        setActivateUpdateButton(true);
+        break;
+      case student.email != studentCopy.email:
+        setActivateUpdateButton(true);
+        break;
+      case student.classLevel != studentCopy.classLevel:
+        setActivateUpdateButton(true);
+        break;
+      case student.phoneNumber != studentCopy.phoneNumber:
+        setActivateUpdateButton(true);
+        break;
+      default:
+        setActivateUpdateButton(false);
+    }
+  }, [studentCopy]);
 
   return (
     <section className="profile">
@@ -27,9 +54,11 @@ const ProfileForm = ({ student }) => {
           </div>
           <div className="actions">
             <button onClick={handleLogout} className="btn cancel">
-              Logout
+              {status == responseStatus.PENDING ? <Loader /> : <>Logout</>}
             </button>
-            <button className="btn save">update info</button>
+            <button className="btn save" disabled={!activateUpdateButton}>
+              update info
+            </button>
           </div>
         </div>
       </div>
@@ -66,9 +95,6 @@ const ProfileForm = ({ student }) => {
             type="text"
             placeholder="killianjames@gmail.com"
             value={studentCopy.email}
-            onChange={(e) =>
-              setStudentCopy({ ...studentCopy, email: e.target.value })
-            }
           />
         </div>
 
