@@ -15,7 +15,10 @@ body {
     height: 100vh;
 }
 
-
+.vertical-btn{
+    display: flex;
+    gap: 8px;
+}
 
 .sidebar {
     width: 90px;

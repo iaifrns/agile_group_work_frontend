@@ -1,8 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import DashboardLayout from "../../layout/Dashboard";
 import "./css/groupdetail.css";
 
 const GroupDetailPage = () => {
+  const navigatorTo = useNavigate();
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
       <div class="layout">
@@ -52,7 +54,15 @@ const GroupDetailPage = () => {
           <div class="card members-section">
             <div class="members-header">
               <h2 class="card-title">Group Members</h2>
-              <button class="btn-add">+ Add Member</button>
+              <div className="vertical-btn">
+                <button
+                  class="btn-add"
+                  onClick={() => navigatorTo("/group/request")}
+                >
+                  View Request
+                </button>
+                <button class="btn-add">+ Add Member</button>
+              </div>
             </div>
 
             <div class="member-list">

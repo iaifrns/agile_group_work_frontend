@@ -35,10 +35,18 @@ function App() {
             }
           />
           <Route
-            path="/group/request"
+            path="/group/detail"
             element={
               <ProtectedRoute>
                 <GroupDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/group/request"
+            element={
+              <ProtectedRoute>
+                <GroupRequestPage />
               </ProtectedRoute>
             }
           />
