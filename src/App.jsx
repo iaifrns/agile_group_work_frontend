@@ -7,6 +7,7 @@ import Registration from "./pages/authentification/Registration";
 import ContextProvider from "./hooks/useContext";
 import GroupList from "./pages/groups/GroupList";
 import GroupRequestPage from "./pages/groups/GroupRequest";
+import GroupDetailPage from "./pages/groups/GroupDetailPage";
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
             path="/group/request"
             element={
               <ProtectedRoute>
-                <GroupRequestPage />
+                <GroupDetailPage />
               </ProtectedRoute>
             }
           />

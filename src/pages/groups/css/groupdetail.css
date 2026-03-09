@@ -1,0 +1,277 @@
+
+.layout {
+    height: 100vh;
+    overflow: scroll;
+}
+.main-content {
+  flex: 1;
+  padding: 40px 60px;
+  overflow-y: auto;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  color: #72767d;
+  font-size: 14px;
+}
+
+.card {
+  background: #2b2d31;
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 24px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.status-badge {
+  background: #2a2d31;
+  color: #b9bbbe;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #3a3d41;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: #b9bbbe;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.info-value {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-edit {
+  background: #40444b;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-edit:hover {
+  background: #4a4e55;
+}
+
+.members-section {
+  margin-bottom: 24px;
+}
+
+.members-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-add {
+  background: #5865f2;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-add:hover {
+  background: #4752c4;
+}
+
+.member-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.member-item {
+  background: #40444b;
+  border-radius: 8px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.member-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.member-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #5865f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.member-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.member-name {
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.admin-badge {
+  background: #5051f9;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.member-email {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.member-action {
+  color: #72767d;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-remove {
+  background: #5051f9;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background: #c93538;
+}
+
+.danger-zone {
+  background: #2b2d31;
+  border-radius: 12px;
+  padding: 32px;
+  border: 1px solid #3a3d41;
+}
+
+.danger-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.danger-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.danger-info h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.danger-info p {
+  color: #b9bbbe;
+  font-size: 13px;
+}
+
+.btn-danger {
+  background: #ed4245;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  background: #c93538;
+}
+
+@media (max-width: 968px) {
+
+  .main-content {
+    padding: 24px 20px;
+  }
+
+  .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .member-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .danger-content {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+}
