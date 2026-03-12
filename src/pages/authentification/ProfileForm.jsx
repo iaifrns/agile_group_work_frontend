@@ -5,10 +5,11 @@ import "./css/ProfileForm.css";
 import { logout } from "./services/logout";
 import Loader from "../../assets/icons/loader";
 import { responseStatus } from "../../assets/enum/responseStatus";
+import { updateStudent } from "./services/updateStudent";
 
-const ProfileForm = ({ student }) => {
+const ProfileForm = ({ student, setStudent, setLoading }) => {
   const navigateTo = useNavigate();
-  const { handleId, name } = useContext(Context);
+  const { handleId, name, id } = useContext(Context);
   const [status, setStatus] = useState();
   const [studentCopy, setStudentCopy] = useState(student);
   const [activateUpdateButton, setActivateUpdateButton] = useState(false);
@@ -16,6 +17,18 @@ const ProfileForm = ({ student }) => {
   const handleLogout = async () => {
     if (status != responseStatus.PENDING) {
       await logout(setStatus, navigateTo, handleId);
+    }
+  };
+
+  const handleUpdate = async () => {
+    const data = {
+      firstName: studentCopy.firstName,
+      lastName: studentCopy.lastName,
+      phoneNumber: studentCopy.phoneNumber,
+      classLevel: studentCopy.classLevel,
+    };
+    if (activateUpdateButton) {
+      await updateStudent(data, setLoading, id, setStudent);
     }
   };
 
@@ -56,7 +69,11 @@ const ProfileForm = ({ student }) => {
             <button onClick={handleLogout} className="btn cancel">
               {status == responseStatus.PENDING ? <Loader /> : <>Logout</>}
             </button>
-            <button className="btn save" disabled={!activateUpdateButton}>
+            <button
+              className="btn save"
+              disabled={!activateUpdateButton}
+              onClick={handleUpdate}
+            >
               update info
             </button>
           </div>
@@ -100,14 +117,17 @@ const ProfileForm = ({ student }) => {
 
         <div className="field">
           <label>Class Level</label>
-          <input
-            type="text"
-            placeholder="Undergraduate, Postgraduate..."
+          <select
             value={studentCopy.classLevel ?? ""}
             onChange={(e) =>
               setStudentCopy({ ...studentCopy, classLevel: e.target.value })
             }
-          />
+          >
+            <option value=""></option>
+            <option value="undergraduate">Undergraduate</option>
+            <option value="postgraduate">Postgraduate</option>
+            <option value="doctorate">Doctorate</option>
+          </select>
         </div>
 
         <div className="field">

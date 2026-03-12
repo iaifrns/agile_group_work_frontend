@@ -25,9 +25,9 @@ const ProfilePage = () => {
     await getAStudent(setStatus, handleName, setStudent, id);
   };
 
-  useEffect(()=>{
-    getStudent()
-  },[])
+  useEffect(() => {
+    getStudent();
+  }, []);
 
   return (
     <DashboardLayout active={ActiveSideBarMenu.Profile}>
@@ -36,7 +36,11 @@ const ProfilePage = () => {
       ) : (
         <>
           <Banner />
-          <ProfileForm student={student} />
+          <ProfileForm
+            setStudent={setStudent}
+            student={student}
+            setLoading={setStatus}
+          />
         </>
       )}
     </DashboardLayout>

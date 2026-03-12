@@ -8,7 +8,6 @@ export const getAStudent = async (setStatus, handleName, setStudent, id) => {
     const response = await axios.get(getAStudentUrl + id, {
       withCredentials: true,
     });
-    console.log(response.data, 'this is the response')
     if (response.data.success) {
       setStudent({
         firstName: response.data.data.firstName,
