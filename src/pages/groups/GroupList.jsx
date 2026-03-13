@@ -5,39 +5,59 @@ import { ButtonWithIconOnLeft } from "../../components/buttons";
 import { InputWithIconOnRight } from "../../components/inputs";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import DashboardLayout from "../../layout/Dashboard";
-import { fakeGroupList } from "../../mock/groupList";
 import GroupItem from "./components/GroupItem";
 
-import "./css/groupList.css";
+import { responseStatus } from "../../assets/enum/responseStatus";
 import NotfoundIcon from "../../assets/icons/notfound";
-import JoinRequestConfimationPopup from "./components/JoinRequestConfimationPopup";
+import LoaderPage from "../../components/LoaderPage";
 import CreateGroupPopup from "./components/CreateGroupPopup";
+import JoinRequestConfimationPopup from "./components/JoinRequestConfimationPopup";
+import "./css/groupList.css";
+import { getAllGroups } from "./services/getAllGroups";
 
 const GroupList = () => {
   const [searchText, setSearchText] = useState("");
   const [filterGroupList, setFilterGroupList] = useState([]);
   const [groupName, setGroupName] = useState("");
+  const [groupId, setGroupId] = useState("");
   const [showJoinPopup, setShowJoinPopup] = useState(false);
   const [showCreateGroupPopup, setShowCreateGroupPopup] = useState(false);
   const [members, setMembers] = useState([]);
 
+  const [status, setStatus] = useState(responseStatus.PENDING);
+  const [groupList, setGroupList] = useState([]);
+  const [students, setStudents] = useState([]);
+
   useEffect(() => {
     setFilterGroupList(
-      fakeGroupList.filter((name) =>
-        name.toLocaleLowerCase().includes(searchText.toLowerCase()),
+      groupList.filter((item) =>
+        item.name.toLocaleLowerCase().includes(searchText.toLowerCase()),
       ),
     );
-  }, [searchText]);
+  }, [searchText, status]);
 
-  const handleJoinPopupDisplay = (name) => {
+  const handleJoinPopupDisplay = (group) => {
     setShowJoinPopup(true);
-    setGroupName(name);
+    setGroupId(group.id);
+    setGroupName(group.name);
   };
 
   const handleCloseJoinPopupDisplay = () => {
     setShowJoinPopup(false);
     setGroupName("");
   };
+
+  useEffect(() => {
+    getAllGroups(setStatus, setGroupList, setStudents);
+  }, []);
+
+  if (status == responseStatus.PENDING) {
+    return (
+      <DashboardLayout active={ActiveSideBarMenu.GroupList}>
+        <LoaderPage />
+      </DashboardLayout>
+    );
+  }
 
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupList}>
@@ -48,12 +68,14 @@ const GroupList = () => {
           setShowCreateGroupPopup(false);
         }}
         members={members}
+        students={students}
         setMembers={setMembers}
       />
       <JoinRequestConfimationPopup
         show={showJoinPopup}
         name={groupName}
         closePopUp={handleCloseJoinPopupDisplay}
+        groupId={groupId}
       />
       <div className="body">
         <div className="page_container">
@@ -78,8 +100,8 @@ const GroupList = () => {
             <div className="group_list_display">
               {filterGroupList.map((item, ind) => (
                 <GroupItem
-                  name={item}
-                  id={ind}
+                  name={item.name}
+                  id={ind + item.id}
                   join={() => handleJoinPopupDisplay(item)}
                 />
               ))}

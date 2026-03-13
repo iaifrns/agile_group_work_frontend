@@ -5,3 +5,6 @@ export const logoutApiUrl = baseBackendUrl + "auth/logout";
 export const checkTokenApi = baseBackendUrl + "auth/check_token";
 export const getAStudentUrl = baseBackendUrl + "student/profile/";
 export const updateStudentUrl = baseBackendUrl + "student/profile/";
+export const getAllGroupsUrl = baseBackendUrl + "groups/"
+export const getAllStudentsUrl = baseBackendUrl + "student/get_all_students"
+export const createGroupUrl = baseBackendUrl + 'groups/create'

@@ -1,26 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CloseIcon, { SmallCloseIcon } from "../../../assets/icons/close";
 import SearchIcon from "../../../assets/icons/search";
+import { fakeUserList } from "../../../mock/userlist";
 import { stringToColor } from "../../../services/generateColor";
 
 import "../css/createGroup.css";
-import { responseStatus } from "../../../assets/enum/responseStatus";
-import Loader from "../../../assets/icons/loader";
-import { Context } from "../../../hooks/useContext";
-import { createGroup } from "../services/createGroup";
 
 const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
   const [searchText, setSearchText] = useState("");
   const [filterList, setFilterList] = useState([]);
-
-  const { id } = useContext(Context);
-
-  const [groupName, setGroupName] = useState({
-    value: "",
-    errMessage: "",
-  });
-
-  const [status, setStatus] = useState();
 
   const handleMemberList = (member) => {
     if (members.filter((item) => item.email == member.email).length < 1) {
@@ -37,41 +25,10 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
     setFilterList(
       students.filter(
         (item) =>
-          (item.firstName + " " + item.lastName).includes(searchText) ||
-          item.email.includes(searchText),
+          (item.firstName + ' ' + item.lastName).includes(searchText) || item.email.includes(searchText),
       ),
     );
   }, [searchText]);
-
-  const handleCreateGroup = () => {
-    if (groupName.value.length < 1) {
-      setGroupName({
-        ...groupName,
-        errMessage: "The group name cannot be empty",
-      });
-    } else {
-      createGroup(members, groupName.value, id, setStatus);
-      if (status == responseStatus.SUCCESS) {
-        setMembers([]);
-        setGroupName({ value: "", errMessage: "" });
-      }
-    }
-  };
-
-  if (status == responseStatus.PENDING) {
-    return (
-      <div
-        className="popup-container"
-        style={{ display: show ? "flex" : "none" }}
-      >
-        <div className="popup">
-          <Loader />
-          <p>Creating Group ...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div
       className="popup-container"
@@ -93,15 +50,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
         <div className="popup_form">
           <div className="input_container">
             <p>Group Name:</p>
-            <input
-              type="text"
-              value={groupName.value}
-              placeholder="Enter the Group Name please"
-              onChange={(e) =>
-                setGroupName({ ...groupName, value: e.target.value })
-              }
-            />
-            <sapn className="errorMessage">{groupName.errMessage}</sapn>
+            <input type="text" />
           </div>
           <div className="input_container">
             <p>Group Members:</p>
@@ -112,7 +61,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
                 <>
                   {members.map((item, ind) => (
                     <div className="selected_member" key={ind + item.email}>
-                      <p>{item.firstName + " " + item.lastName}</p>
+                      <p>{item.name}</p>
                       <div onClick={() => handleRemoveMember(ind)}>
                         <SmallCloseIcon c={"#aeb4b9"} />
                       </div>
@@ -140,14 +89,12 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
                   >
                     <div
                       className="user_image"
-                      style={{ backgroundColor: stringToColor(item.firstName) }}
+                      style={{ backgroundColor: stringToColor(item.name) }}
                     >
-                      <p>{item.firstName.slice(0, 1)}</p>
+                      <p>{item.name.slice(0, 1)}</p>
                     </div>
                     <div className="user_detail">
-                      <p className="name">
-                        {item.firstName + " " + item.lastName}
-                      </p>
+                      <p className="name">{item.name}</p>
                       <p className="desc">{item.email}</p>
                     </div>
                   </div>
@@ -157,7 +104,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
           </div>
         </div>
         <div className="popup_button">
-          <button onClick={handleCreateGroup}>Create Group</button>
+          <button>Create Group</button>
         </div>
       </div>
     </div>
