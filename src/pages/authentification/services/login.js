@@ -1,17 +1,28 @@
 import axios from "axios";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import { loginApiUrl } from "../../../constants/endpoints";
+import { getAllStudentGroup } from "./getAllStudentGroups";
 
-const loginUser = async (data, setErrMess, setStatus, handleId, navigate) => {
+const loginUser = async (
+  data,
+  setErrMess,
+  setStatus,
+  handleId,
+  navigate,
+  setStudentGroups,
+) => {
   try {
     setStatus(responseStatus.PENDING);
-    const response = await axios.post(loginApiUrl, data, {withCredentials: true});
-    console.log(response)
-    if(response.data.data){
-        handleId(response.data.data.id)
-        navigate('/profile')
-    }else{
-        setErrMess(response.data.error)
+    const response = await axios.post(loginApiUrl, data, {
+      withCredentials: true,
+    });
+    // console.log(response)
+    if (response.data.data) {
+      handleId(response.data.data.id);
+      await getAllStudentGroup(setStatus, setStudentGroups);
+      navigate("/profile");
+    } else {
+      setErrMess(response.data.error);
     }
     setStatus(responseStatus.SUCCESS);
   } catch (e) {
@@ -22,4 +33,3 @@ const loginUser = async (data, setErrMess, setStatus, handleId, navigate) => {
 };
 
 export { loginUser };
-

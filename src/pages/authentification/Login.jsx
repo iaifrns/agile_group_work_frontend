@@ -1,21 +1,21 @@
-import "./css/login.css";
-import pana from "../../assets/pana.svg";
-import Mail from "../../assets/icons/mail";
-import CustomInput, { CustomInputPassword } from "./components/input";
-import PasswordIcon from "../../assets/icons/password";
-import { CustomButton } from "./components/button";
-import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { loginUser } from "./services/login";
+import { useNavigate } from "react-router-dom";
+import Mail from "../../assets/icons/mail";
+import PasswordIcon from "../../assets/icons/password";
+import pana from "../../assets/pana.svg";
 import { Context } from "../../hooks/useContext";
+import { CustomButton } from "./components/button";
+import CustomInput, { CustomInputPassword } from "./components/input";
+import "./css/login.css";
 import { loginInputCheck } from "./services/inputCheck";
+import { loginUser } from "./services/login";
 
 const Login = () => {
   const navigateTo = useNavigate();
   const [status, setStatus] = useState();
   const [errMes, setErrMes] = useState();
 
-  const { handleId } = useContext(Context);
+  const { handleId, setStudentGroups } = useContext(Context);
 
   const [loginData, setLoginData] = useState({
     email: {
@@ -28,10 +28,10 @@ const Login = () => {
     },
   });
 
-  const submit = () => {
+  const submit = async () => {
     const isInputDataOk = loginInputCheck(loginData, setLoginData);
     if (isInputDataOk) {
-      loginUser(
+      await loginUser(
         {
           email: loginData.email.value,
           password: loginData.password.value,
@@ -40,6 +40,7 @@ const Login = () => {
         setStatus,
         handleId,
         navigateTo,
+        setStudentGroups
       );
     }
   };

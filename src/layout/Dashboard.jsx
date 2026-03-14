@@ -1,9 +1,11 @@
 import Sidebar from "../pages/authentification/Sidebar";
 import Topbar from "../pages/authentification/Topbar";
 
+
 import "../pages/authentification/css/ProfilePage.css";
 
 const DashboardLayout = ({ children, active }) => {
+
   return (
     <div className="app">
       <Sidebar active={active} />

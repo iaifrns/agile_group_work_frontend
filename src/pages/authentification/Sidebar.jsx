@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import "./css/Sidebar.css";
 import { useNavigate } from "react-router-dom";
-import Logo from '../../assets/Group 9.png'
+import Logo from "../../assets/Group 9.png";
+import { Context } from "../../hooks/useContext";
 
 const Menu = ({ menuInfo, active }) => {
   const [display, setDisplay] = useState(false);
@@ -27,6 +28,17 @@ const Menu = ({ menuInfo, active }) => {
 };
 
 const Sidebar = ({ active }) => {
+  const { studentGroups } = useContext(Context);
+  const [menu, setMenu] = useState([]);
+
+  useEffect(() => {
+    if (studentGroups.length < 1) {
+      const { GroupDetail, ...newMenu } = ActiveSideBarMenu;
+      setMenu(newMenu);
+    } else {
+      setMenu(ActiveSideBarMenu);
+    }
+  }, [studentGroups]);
   return (
     <aside className="sidebar">
       <div className="logo">
@@ -34,7 +46,7 @@ const Sidebar = ({ active }) => {
         <span>OCTOM.</span>
       </div>
       <nav className="nav">
-        {Object.values(ActiveSideBarMenu).map((icon, idx) => (
+        {Object.values(menu).map((icon, idx) => (
           <Menu
             menuInfo={icon}
             key={icon.id + icon.name + idx}
