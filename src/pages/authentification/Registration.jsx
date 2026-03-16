@@ -40,7 +40,7 @@ const Registration = () => {
   const [status, setStatus] = useState();
   const [error, setError] = useState();
 
-  const {handleId} = useContext(Context)
+  const {handleId, setStudentGroups, setActiveGroup} = useContext(Context)
 
   const handleSubmit = async () => {
     const isInputOk = registerInputCheck(registerData, setRegisterData);
@@ -57,7 +57,9 @@ const Registration = () => {
         setError,
         setStatus,
         navigateTo,
-        handleId
+        handleId,
+        setStudentGroups,
+        setActiveGroup
       );
     }
   };

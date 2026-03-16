@@ -7,15 +7,15 @@ export const Context = createContext({
   handleName: (e) => {},
   studentGroups: [],
   setStudentGroups: (e) => {},
-  run: false,
-  setRun: (e) => {},
+  activeGroup: {},
+  setActiveGroup: (e) => {},
 });
 
 const ContextProvider = ({ children }) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [studentGroups, setStudentGroups] = useState([]);
-  const [run, setRun] = useState(false);
+  const [activeGroup, setActiveGroup] = useState({});
 
   return (
     <Context.Provider
@@ -26,8 +26,8 @@ const ContextProvider = ({ children }) => {
         handleName: setName,
         studentGroups,
         setStudentGroups,
-        run,
-        setRun,
+        activeGroup,
+        setActiveGroup,
       }}
     >
       {children}

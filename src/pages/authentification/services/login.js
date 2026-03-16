@@ -10,6 +10,7 @@ const loginUser = async (
   handleId,
   navigate,
   setStudentGroups,
+  setActiveGroup
 ) => {
   try {
     setStatus(responseStatus.PENDING);
@@ -19,7 +20,7 @@ const loginUser = async (
     // console.log(response)
     if (response.data.data) {
       handleId(response.data.data.id);
-      await getAllStudentGroup(setStatus, setStudentGroups);
+      await getAllStudentGroup(setStatus, setStudentGroups, setActiveGroup);
       navigate("/profile");
     } else {
       setErrMess(response.data.error);

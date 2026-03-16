@@ -5,7 +5,7 @@ import { stringToColor } from "../../services/generateColor";
 import Dropdown from "../../assets/icons/dropdown";
 
 const Topbar = () => {
-  const { name, studentGroups } = useContext(Context);
+  const { name, activeGroup, studentGroups } = useContext(Context);
   const [showDropDown, setShowDropDown] = useState(false);
   return (
     <header className="topbar">
@@ -30,8 +30,8 @@ const Topbar = () => {
           >
             <p>{name.slice(0, 2)}</p>
           </div>
-          {studentGroups.length > 0 && <p>{studentGroups[0].name}</p>}
-          {studentGroups.length > 0 && <Dropdown />}
+          {activeGroup && <p>{activeGroup.name}</p>}
+          {activeGroup && <Dropdown />}
         </div>
         {showDropDown && studentGroups.length > 0 && (
           <div className="dropdown">

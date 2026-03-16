@@ -1,6 +1,7 @@
 import axios from "axios";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import { registerApiUrl } from "../../../constants/endpoints";
+import { getAllStudentGroup } from "./getAllStudentGroups";
 
 const registerUser = async (
   data,
@@ -8,6 +9,8 @@ const registerUser = async (
   setStatus,
   navigateTo,
   handleId,
+  setStudentGroups,
+  setActiveGroup
 ) => {
   try {
     setStatus(responseStatus.PENDING);
@@ -18,6 +21,7 @@ const registerUser = async (
       setErrMess(response.data.error);
     } else {
       handleId(response.data.data.id);
+      await getAllStudentGroup(setStatus, setStudentGroups,setActiveGroup);
       navigateTo("/profile");
     }
     setStatus(responseStatus.SUCCESS);

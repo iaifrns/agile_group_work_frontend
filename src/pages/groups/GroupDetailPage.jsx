@@ -2,16 +2,40 @@ import { useNavigate } from "react-router-dom";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import DashboardLayout from "../../layout/Dashboard";
 import "./css/groupdetail.css";
+import { useContext, useEffect, useState } from "react";
+import { responseStatus } from "../../assets/enum/responseStatus";
+import LoaderPage from "../../components/LoaderPage";
+import { Context } from "../../hooks/useContext";
+import { getGroupDetailInfo } from "./services/getGroupDetailInfo";
 
 const GroupDetailPage = () => {
+  const [status, setStatus] = useState(responseStatus.PENDING);
+  const [groupDetail, setGroupDetail] = useState();
   const navigatorTo = useNavigate();
+
+  const { activeGroup } = useContext(Context);
+
+  useEffect(() => {
+    getGroupDetailInfo(activeGroup.id, setStatus, setGroupDetail);
+  }, []);
+
+  if (status == responseStatus.PENDING) {
+    return (
+      <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
+        <LoaderPage />
+      </DashboardLayout>
+    );
+  }
+
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
       <div className="layout">
         <div className="main-content">
           <div className="page-header">
             <h1 className="page-title">Group Details</h1>
-            <p className="page-subtitle">View and manage your group information</p>
+            <p className="page-subtitle">
+              View and manage your group information
+            </p>
           </div>
 
           {/* <!-- Group Information --> */}
@@ -24,24 +48,26 @@ const GroupDetailPage = () => {
             <div className="info-row">
               <span className="info-label">Group Name</span>
               <div className="info-value">
-                Agile Project
+                {groupDetail.name}
                 <button className="btn-edit">Edit</button>
               </div>
             </div>
 
             <div className="info-row">
               <span className="info-label">Group ID</span>
-              <span className="info-value">CSM2020</span>
+              <span className="info-value">{groupDetail.id}</span>
             </div>
 
             <div className="info-row">
               <span className="info-label">Created Date</span>
-              <span className="info-value">15 Feburay 2024</span>
+              <span className="info-value">{groupDetail.createdAt}</span>
             </div>
 
             <div className="info-row">
               <span className="info-label">Total Members</span>
-              <span className="info-value">6 Members</span>
+              <span className="info-value">
+                {groupDetail.members.length} Members
+              </span>
             </div>
 
             <div className="info-row">
@@ -66,75 +92,28 @@ const GroupDetailPage = () => {
             </div>
 
             <div className="member-list">
-              <div className="member-item">
-                <div className="member-info">
-                  <div className="member-avatar">FW</div>
-                  <div className="member-details">
-                    <div className="member-name">
-                      Franc Wills Nsini
-                      <span className="admin-badge">Admin</span>
+              {groupDetail.members.map((student) => (
+                <div className="member-item">
+                  <div className="member-info">
+                    <div className="member-avatar">
+                      {student.firstName.slice(0, 2)}
                     </div>
-                    <div className="member-email">fwn@aber.ac.uk</div>
+                    <div className="member-details">
+                      <div className="member-name">
+                        {student.firstName + " " + student.lastName}
+                        {groupDetail.admin == student.id && (
+                          <span className="admin-badge">Admin</span>
+                        )}
+                      </div>
+                      <div className="member-email">{student.email}</div>
+                    </div>
                   </div>
+                  {groupDetail.admin != student.id && (
+                          <span className="btn-remove">Remove</span>
+                        )}
+                  
                 </div>
-                <span className="member-action">Cannot Remove</span>
-              </div>
-
-              <div className="member-item">
-                <div className="member-info">
-                  <div className="member-avatar">XZ</div>
-                  <div className="member-details">
-                    <div className="member-name">Xue Zhang</div>
-                    <div className="member-email">xuz3@aber.ac.uk</div>
-                  </div>
-                </div>
-                <button className="btn-remove">Remove</button>
-              </div>
-
-              <div className="member-item">
-                <div className="member-info">
-                  <div className="member-avatar">KA</div>
-                  <div className="member-details">
-                    <div className="member-name">Kwaku Aborah</div>
-                    <div className="member-email">kwa8@aber.ac.uk</div>
-                  </div>
-                </div>
-                <button className="btn-remove">Remove</button>
-              </div>
-
-              <div className="member-item">
-                <div className="member-info">
-                  <div className="member-avatar">JC</div>
-                  <div className="member-details">
-                    <div className="member-name">Jefferson Cobbina</div>
-                    <div className="member-email">jec91@aber.ac.uk</div>
-                  </div>
-                </div>
-                <button className="btn-remove">Remove</button>
-              </div>
-
-              <div className="member-item">
-                <div className="member-info">
-                  <div className="member-avatar">AL</div>
-                  <div className="member-details">
-                    <div className="member-name">Alessandro Lewis</div>
-                    <div className="member-email">all49@aber.ac.uk</div>
-                  </div>
-                </div>
-
-                <button className="btn-remove">Remove</button>
-              </div>
-
-              <div className="member-item">
-                <div className="member-info">
-                  <div className="member-avatar">FL</div>
-                  <div className="member-details">
-                    <div className="member-name">Feng Liu</div>
-                    <div className="member-email">fel12@aber.ac.uk</div>
-                  </div>
-                </div>
-                <button className="btn-remove">Remove</button>
-              </div>
+              ))}
             </div>
           </div>
 
