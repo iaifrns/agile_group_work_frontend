@@ -14,7 +14,7 @@ const GroupDetailPage = () => {
   const [groupDetail, setGroupDetail] = useState();
   const navigatorTo = useNavigate();
 
-  const { activeGroup } = useContext(Context);
+  const { activeGroup, id } = useContext(Context);
 
   useEffect(() => {
     getGroupDetailInfo(activeGroup.id, setStatus, setGroupDetail);
@@ -66,7 +66,9 @@ const GroupDetailPage = () => {
 
             <div className="info-row">
               <span className="info-label">Group ID</span>
-              <span className="info-value">{stringTo6Code(groupDetail.id).toUpperCase()}</span>
+              <span className="info-value">
+                {stringTo6Code(groupDetail.id).toUpperCase()}
+              </span>
             </div>
 
             <div className="info-row">
@@ -83,11 +85,7 @@ const GroupDetailPage = () => {
 
             <div className="info-row">
               <span className="info-label">Admin</span>
-              <span className="info-value">
-                {
-                  handleAdminName()
-                }
-              </span>
+              <span className="info-value">{handleAdminName()}</span>
             </div>
           </div>
 
@@ -96,12 +94,15 @@ const GroupDetailPage = () => {
             <div className="members-header">
               <h2 className="card-title">Group Members</h2>
               <div className="vertical-btn">
-                <button
-                  className="btn-request"
-                  onClick={() => navigatorTo("/group/request")}
-                >
-                  View Request
-                </button>
+                {id == groupDetail.admin && (
+                  <button
+                    className="btn-request"
+                    onClick={() => navigatorTo("/group/request")}
+                  >
+                    View Request
+                  </button>
+                )}
+
                 <button className="btn-add">+ Add Member</button>
               </div>
             </div>

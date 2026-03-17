@@ -148,14 +148,17 @@ body {
 .search-box {
     position: relative;
     width: 260px;
+    display: flex; 
+    align-items: center;
+    padding: 8px 16px 8px 8px; 
+    border-radius: 10px;
+    background: black;
 }
 
 .search-box input {
     width: 100%;
-    background: black;
+    background: transparent;
     border: none;
-    padding: 10px 40px 10px 12px; 
-    border-radius: 10px;
     color: white;
 }
 
