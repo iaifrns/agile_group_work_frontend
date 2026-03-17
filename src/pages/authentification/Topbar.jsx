@@ -5,8 +5,9 @@ import { stringToColor } from "../../services/generateColor";
 import Dropdown from "../../assets/icons/dropdown";
 
 const Topbar = () => {
-  const { name, activeGroup, studentGroups } = useContext(Context);
+  const { name, activeGroup, studentGroups, setActiveGroup } = useContext(Context);
   const [showDropDown, setShowDropDown] = useState(false);
+
   return (
     <header className="topbar">
       <div></div>
@@ -36,7 +37,10 @@ const Topbar = () => {
         {showDropDown && studentGroups.length > 0 && (
           <div className="dropdown">
             {studentGroups.map((group) => (
-              <div className="dropdownItem">{group.name}</div>
+              <div className="dropdownItem" onClick={()=>{
+                setActiveGroup(group)
+                setShowDropDown(false)
+              }}>{group.name}</div>
             ))}
           </div>
         )}

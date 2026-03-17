@@ -15,7 +15,7 @@ const Login = () => {
   const [status, setStatus] = useState();
   const [errMes, setErrMes] = useState();
 
-  const { handleId, setStudentGroups, setActiveGroup } = useContext(Context);
+  const { handleId } = useContext(Context);
 
   const [loginData, setLoginData] = useState({
     email: {
@@ -39,9 +39,7 @@ const Login = () => {
         setErrMes,
         setStatus,
         handleId,
-        navigateTo,
-        setStudentGroups,
-        setActiveGroup
+        navigateTo
       );
     }
   };

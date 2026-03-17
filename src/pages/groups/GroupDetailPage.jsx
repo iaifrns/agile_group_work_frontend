@@ -7,6 +7,7 @@ import { responseStatus } from "../../assets/enum/responseStatus";
 import LoaderPage from "../../components/LoaderPage";
 import { Context } from "../../hooks/useContext";
 import { getGroupDetailInfo } from "./services/getGroupDetailInfo";
+import { stringTo6Code } from "../../services/generateCodeId";
 
 const GroupDetailPage = () => {
   const [status, setStatus] = useState(responseStatus.PENDING);
@@ -17,7 +18,7 @@ const GroupDetailPage = () => {
 
   useEffect(() => {
     getGroupDetailInfo(activeGroup.id, setStatus, setGroupDetail);
-  }, []);
+  }, [activeGroup]);
 
   if (status == responseStatus.PENDING) {
     return (
@@ -26,6 +27,16 @@ const GroupDetailPage = () => {
       </DashboardLayout>
     );
   }
+
+  const handleAdminName = () => {
+    return (
+      groupDetail.members.filter((item) => item.id == groupDetail.admin)[0]
+        .firstName +
+      " " +
+      groupDetail.members.filter((item) => item.id == groupDetail.admin)[0]
+        .lastName
+    );
+  };
 
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
@@ -55,7 +66,7 @@ const GroupDetailPage = () => {
 
             <div className="info-row">
               <span className="info-label">Group ID</span>
-              <span className="info-value">{groupDetail.id}</span>
+              <span className="info-value">{stringTo6Code(groupDetail.id).toUpperCase()}</span>
             </div>
 
             <div className="info-row">
@@ -72,7 +83,11 @@ const GroupDetailPage = () => {
 
             <div className="info-row">
               <span className="info-label">Admin</span>
-              <span className="info-value">Franc Wills Nsini</span>
+              <span className="info-value">
+                {
+                  handleAdminName()
+                }
+              </span>
             </div>
           </div>
 
@@ -82,7 +97,7 @@ const GroupDetailPage = () => {
               <h2 className="card-title">Group Members</h2>
               <div className="vertical-btn">
                 <button
-                  className="btn-add"
+                  className="btn-request"
                   onClick={() => navigatorTo("/group/request")}
                 >
                   View Request
@@ -109,9 +124,8 @@ const GroupDetailPage = () => {
                     </div>
                   </div>
                   {groupDetail.admin != student.id && (
-                          <span className="btn-remove">Remove</span>
-                        )}
-                  
+                    <span className="btn-remove">Remove</span>
+                  )}
                 </div>
               ))}
             </div>

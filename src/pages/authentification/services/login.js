@@ -1,7 +1,6 @@
 import axios from "axios";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import { loginApiUrl } from "../../../constants/endpoints";
-import { getAllStudentGroup } from "./getAllStudentGroups";
 
 const loginUser = async (
   data,
@@ -9,8 +8,6 @@ const loginUser = async (
   setStatus,
   handleId,
   navigate,
-  setStudentGroups,
-  setActiveGroup
 ) => {
   try {
     setStatus(responseStatus.PENDING);
@@ -20,7 +17,6 @@ const loginUser = async (
     // console.log(response)
     if (response.data.data) {
       handleId(response.data.data.id);
-      await getAllStudentGroup(setStatus, setStudentGroups, setActiveGroup);
       navigate("/profile");
     } else {
       setErrMess(response.data.error);
@@ -34,3 +30,4 @@ const loginUser = async (
 };
 
 export { loginUser };
+

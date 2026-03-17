@@ -9,7 +9,7 @@ import { updateStudent } from "./services/updateStudent";
 
 const ProfileForm = ({ student, setStudent, setLoading }) => {
   const navigateTo = useNavigate();
-  const { handleId, name, id, setStudentGroups } = useContext(Context);
+  const { handleId, name, id, setStudentGroups, activeGroup } = useContext(Context);
   const [status, setStatus] = useState();
   const [studentCopy, setStudentCopy] = useState(student);
   const [activateUpdateButton, setActivateUpdateButton] = useState(false);
@@ -62,9 +62,9 @@ const ProfileForm = ({ student, setStudent, setLoading }) => {
           <div className="avatar">
             <img src="Group 1000004098.png" alt="avatar" />
           </div>
-          <div className="user-info">
+          <div className="userInfo">
             <h2 className="username">{name}</h2>
-            <p className="group-number">Group Number: 7</p>
+            <p className="group-number">Group: {activeGroup.name}</p>
           </div>
           <div className="actions">
             <button onClick={handleLogout} className="btn cancel">
