@@ -9,7 +9,15 @@ import { updateStudent } from "./services/updateStudent";
 
 const ProfileForm = ({ student, setStudent, setLoading }) => {
   const navigateTo = useNavigate();
-  const { handleId, name, id, setStudentGroups, activeGroup } = useContext(Context);
+  const {
+    handleId,
+    name,
+    id,
+    setStudentGroups,
+    activeGroup,
+    setRun,
+    setActiveGroup,
+  } = useContext(Context);
   const [status, setStatus] = useState();
   const [studentCopy, setStudentCopy] = useState(student);
   const [activateUpdateButton, setActivateUpdateButton] = useState(false);
@@ -17,7 +25,9 @@ const ProfileForm = ({ student, setStudent, setLoading }) => {
   const handleLogout = async () => {
     if (status != responseStatus.PENDING) {
       await logout(setStatus, navigateTo, handleId);
-      setStudentGroups([])
+      setStudentGroups([]);
+      setActiveGroup({});
+      setRun(false);
     }
   };
 

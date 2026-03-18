@@ -10,6 +10,7 @@ export const getAllStudentGroup = async (setStatus, setGroups, setActiveGroup) =
     });
     setStatus(responseStatus.SUCCESS);
     setGroups(response.data.groups);
+    console.log('this is the service',response.data.groups)
     if(response.data.groups[0]){
       setActiveGroup(response.data.groups[0]);
     }

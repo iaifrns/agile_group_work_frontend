@@ -11,10 +11,11 @@ import LoaderPage from "../components/LoaderPage";
 const DashboardLayout = ({ children, active }) => {
   const [status, setStatus] = useState(responseStatus.PENDING);
 
-  const { setStudentGroups, setActiveGroup, run, setRun } =
+  const { activeGroup,setStudentGroups,studentGroups, setActiveGroup, run, setRun } =
     useContext(Context);
 
   useEffect(() => {
+    console.log("what the fuck", run)
     if (!run) {
       getAllStudentGroup(setStatus, setStudentGroups, setActiveGroup);
       setRun(true);
@@ -22,6 +23,8 @@ const DashboardLayout = ({ children, active }) => {
       setStatus(responseStatus.SUCCESS);
     }
   }, []);
+
+  console.log(studentGroups,'seperation', activeGroup)
 
   if (status == responseStatus.PENDING) {
     return <LoaderPage />;
