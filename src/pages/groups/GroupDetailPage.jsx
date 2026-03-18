@@ -8,13 +8,18 @@ import LoaderPage from "../../components/LoaderPage";
 import { Context } from "../../hooks/useContext";
 import { getGroupDetailInfo } from "./services/getGroupDetailInfo";
 import { stringTo6Code } from "../../services/generateCodeId";
+import ConfirmationPopup from "../../components/ConfirmationPopup";
+import { deleteGroup } from "./services/deleteGroup";
 
 const GroupDetailPage = () => {
   const [status, setStatus] = useState(responseStatus.PENDING);
   const [groupDetail, setGroupDetail] = useState();
   const navigatorTo = useNavigate();
+  const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [deleteLoader, setDeleteLoader] = useState();
 
-  const { activeGroup, id } = useContext(Context);
+  const { activeGroup, id, setActiveGroup, studentGroups, setStudentGroups } =
+    useContext(Context);
 
   useEffect(() => {
     getGroupDetailInfo(activeGroup.id, setStatus, setGroupDetail);
@@ -38,8 +43,27 @@ const GroupDetailPage = () => {
     );
   };
 
+  const handleDeleteGroup = () => {
+    deleteGroup(
+      setDeleteLoader,
+      activeGroup,
+      setActiveGroup,
+      setStudentGroups,
+      studentGroups,
+      navigatorTo,
+    );
+  };
+
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
+      {showConfirmPopup && (
+        <ConfirmationPopup
+          message={"A you sure you want to delete this group"}
+          close={() => setShowConfirmPopup(false)}
+          confirm={handleDeleteGroup}
+          loader={deleteLoader}
+        />
+      )}
       <div className="layout">
         <div className="main-content">
           <div className="page-header">
@@ -102,8 +126,9 @@ const GroupDetailPage = () => {
                     View Request
                   </button>
                 )}
-
-                <button className="btn-add">+ Add Member</button>
+                {groupDetail.admin == id && (
+                  <button className="btn-add">+ Add Member</button>
+                )}
               </div>
             </div>
 
@@ -124,28 +149,36 @@ const GroupDetailPage = () => {
                       <div className="member-email">{student.email}</div>
                     </div>
                   </div>
-                  {groupDetail.admin != student.id && (
-                    <span className="btn-remove">Remove</span>
-                  )}
+                  {groupDetail.admin != student.id &&
+                    groupDetail.admin == id && (
+                      <span className="btn-remove">Remove</span>
+                    )}
                 </div>
               ))}
             </div>
           </div>
 
           {/* <!-- Danger Zone --> */}
-          <div className="danger-zone">
-            <h2 className="danger-title">Danger Zone</h2>
-            <div className="danger-content">
-              <div className="danger-info">
-                <h3>Delete This Group</h3>
-                <p>
-                  Once you delete a group, there is no going back. Please be
-                  certain.
-                </p>
+          {id == groupDetail.admin && (
+            <div className="danger-zone">
+              <h2 className="danger-title">Danger Zone</h2>
+              <div className="danger-content">
+                <div className="danger-info">
+                  <h3>Delete This Group</h3>
+                  <p>
+                    Once you delete a group, there is no going back. Please be
+                    certain.
+                  </p>
+                </div>
+                <button
+                  className="btn-danger"
+                  onClick={() => setShowConfirmPopup(true)}
+                >
+                  Delete Group
+                </button>
               </div>
-              <button className="btn-danger">Delete Group</button>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </DashboardLayout>
