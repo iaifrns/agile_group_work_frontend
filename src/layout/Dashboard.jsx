@@ -11,7 +11,7 @@ import LoaderPage from "../components/LoaderPage";
 const DashboardLayout = ({ children, active }) => {
   const [status, setStatus] = useState(responseStatus.PENDING);
 
-  const { activeGroup, setStudentGroups, setActiveGroup, run, setRun } =
+  const { setStudentGroups, setActiveGroup, run, setRun } =
     useContext(Context);
 
   useEffect(() => {

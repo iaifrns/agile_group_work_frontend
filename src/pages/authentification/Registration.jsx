@@ -24,6 +24,10 @@ const Registration = () => {
       value: "",
       error: "",
     },
+    confirmPassword: {
+      value: "",
+      error: "",
+    },
     firstName: {
       value: "",
       error: "",
@@ -157,6 +161,23 @@ const Registration = () => {
               })
             }
             e={registerData.password.error}
+          />
+
+          <CustomInputPassword
+            Icon={PasswordIcon}
+            label={"Confirm Password :"}
+            placeholder={"********"}
+            value={registerData.confirmPassword.value}
+            onChange={(e) =>
+              setRegisterData({
+                ...registerData,
+                confirmPassword: {
+                  ...registerData.confirmPassword,
+                  value: e.target.value,
+                },
+              })
+            }
+            e={registerData.confirmPassword.error}
           />
 
           <CustomButton

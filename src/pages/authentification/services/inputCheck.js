@@ -154,6 +154,21 @@ const registerInputCheck = (registerData, setResgisterData) => {
       });
       break;
 
+    case registerData.confirmPassword.value === registerData.password.value:
+      setResgisterData({
+        ...registerData,
+        confirmPassword: {
+          ...registerData.confirmPassword,
+          error: "Confirm password must match the password.",
+        },
+        firstName: { ...registerData.firstName, error: "" },
+        secondName: { ...registerData.secondName, error: "" },
+        email: { ...registerData.email, error: "" },
+        phoneNumber: { ...registerData.phoneNumber, error: "" },
+        password: { ...registerData.password, error: "" },
+      });
+      break;
+
     default:
       res = true;
   }
