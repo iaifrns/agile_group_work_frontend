@@ -25,4 +25,5 @@ body {
 
 .scroll {
     overflow-y: auto;
+    position: relative;
 }

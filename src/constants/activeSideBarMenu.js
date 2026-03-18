@@ -17,6 +17,6 @@ export const ActiveSideBarMenu = {
   },
   Commitment: { id: 4, name: "Scheduling", Icon: ComitmentIcon, path: '#' },
   GroupDetail: { id: 6, name: "Group details", Icon: GroupDetailIcon, path: "/group/detail" },
-  RequestList: { id: 7, name: "Request Page", Icon: RequestListIcon, path: "/group/request_list" },
+  RequestList: { id: 7, name: "Request List Page", Icon: RequestListIcon, path: "/group/request_list" },
   Profile: { id: 5, name: "Profile", Icon: ProfileIcon, path: '/profile' },
 };

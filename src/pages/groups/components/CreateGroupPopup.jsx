@@ -44,7 +44,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
           item.email.includes(searchText),
       ),
     );
-  }, [searchText]);
+  }, [searchText, students]);
 
   const handleCreateGroup = () => {
     if (groupName.value.length < 1) {

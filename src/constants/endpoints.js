@@ -10,3 +10,5 @@ export const getAllStudentGroupsUrl = baseBackendUrl + "groups/get_groups_of_stu
 export const getAllStudentsUrl = baseBackendUrl + "student/get_all_students"
 export const createGroupUrl = baseBackendUrl + 'groups/create'
 export const requestUrl = baseBackendUrl + 'group_request/'
+export const deleteRequestUrl = baseBackendUrl + 'group_request/delete_student_request'
+export const getStudentRequestUrl = baseBackendUrl + 'group_request/student_request'

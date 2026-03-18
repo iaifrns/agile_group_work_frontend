@@ -1,0 +1,64 @@
+.popup-body{
+    width: 100%;
+    height: 93vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.popup-container-conf{
+    width: 400px;
+    border-radius: 8px;
+    background-color: #2b2d31;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.close-conf{
+    display: flex;
+    justify-content: end;
+}
+
+.popup-text-conf{
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.btn-lineup-conf{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btn-lineup-conf button{
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    width: 110px;
+    color: white;
+    font-weight: 700;
+}
+
+.btn-cancel-conf {
+    background-color: rgb(138, 0, 0);
+}
+
+.btn-cancel-conf:hover {
+    background-color: rgb(205, 10, 10);
+}
+
+.btn-confirm-conf{
+    background-color: rgb(80, 81, 249);
+}
+
+.btn-confirm-conf:hover{
+    background-color: rgb(80, 25, 249);
+}
