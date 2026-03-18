@@ -8,12 +8,15 @@ import { responseStatus } from "../../../assets/enum/responseStatus";
 import Loader from "../../../assets/icons/loader";
 import { Context } from "../../../hooks/useContext";
 import { createGroup } from "../services/createGroup";
+import { useNavigate } from "react-router-dom";
 
 const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
   const [searchText, setSearchText] = useState("");
   const [filterList, setFilterList] = useState([]);
 
-  const { id } = useContext(Context);
+  const { id, setActiveGroup } = useContext(Context);
+
+  const navigateTo = useNavigate()
 
   const [groupName, setGroupName] = useState({
     value: "",
@@ -50,7 +53,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
         errMessage: "The group name cannot be empty",
       });
     } else {
-      createGroup(members, groupName.value, id, setStatus);
+      createGroup(members, groupName.value, id, setStatus, setActiveGroup, navigateTo);
       if (status == responseStatus.SUCCESS) {
         setMembers([]);
         setGroupName({ value: "", errMessage: "" });
@@ -77,7 +80,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
       className="popup-container"
       style={{ display: show ? "flex" : "none" }}
     >
-      <div className="popup">
+      <div className="popup-2">
         <div className="close_popup">
           <div onClick={close}>
             <CloseIcon c={"white"} />
@@ -114,7 +117,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
                     <div className="selected_member" key={ind + item.email}>
                       <p>{item.firstName + " " + item.lastName}</p>
                       <div onClick={() => handleRemoveMember(ind)}>
-                        <SmallCloseIcon c={"#aeb4b9"} />
+                        <SmallCloseIcon c={"white"} />
                       </div>
                     </div>
                   ))}

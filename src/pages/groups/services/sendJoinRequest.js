@@ -2,7 +2,7 @@ import axios from "axios";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import { getAllGroupsUrl } from "../../../constants/endpoints";
 
-export const sendJoinRequest = async (setStatus, groupId) => {
+export const sendJoinRequest = async (setStatus, groupId, closePopup, navigateTo) => {
   try {
     setStatus(responseStatus.PENDING);
     const response = await axios.post(
@@ -12,6 +12,7 @@ export const sendJoinRequest = async (setStatus, groupId) => {
     );
     setStatus(responseStatus.SUCCESS);
     alert(response.data.message);
+    navigateTo('/group/request_list')
   } catch (e) {
     console.log(e);
     setStatus(responseStatus.ERROR)
@@ -20,5 +21,7 @@ export const sendJoinRequest = async (setStatus, groupId) => {
     } else {
       alert("Something went wrong, please try later");
     }
+  }finally{
+    closePopup()
   }
 };

@@ -2,7 +2,14 @@ import axios from "axios";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import { createGroupUrl, getAllGroupsUrl } from "../../../constants/endpoints";
 
-export const createGroup = async (members, groupName, userId, setStatus) => {
+export const createGroup = async (
+  members,
+  groupName,
+  userId,
+  setStatus,
+  setActiveGroup,
+  navigateTo,
+) => {
   try {
     setStatus(responseStatus.PENDING);
     const response = await axios.post(
@@ -27,7 +34,9 @@ export const createGroup = async (members, groupName, userId, setStatus) => {
         ),
       );
       setStatus(responseStatus.SUCCESS);
+      setActiveGroup(response.data.data);
       alert(response.data.message);
+      navigateTo("/group/detail");
     } else {
       setStatus(responseStatus.ERROR);
       alert(response.data.message);

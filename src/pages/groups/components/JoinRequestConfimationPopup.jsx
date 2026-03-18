@@ -6,12 +6,15 @@ import { CustomButton } from "./button";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import Loader from "../../../assets/icons/loader";
 import { sendJoinRequest } from "../services/sendJoinRequest";
+import { useNavigate } from "react-router-dom";
 
 const JoinRequestConfimationPopup = ({ name, show, closePopUp, groupId }) => {
   const [status, setStatus] = useState();
 
+  const navigateTo = useNavigate()
+
   const handleSendRequest = () => {
-    sendJoinRequest(setStatus, groupId);
+    sendJoinRequest(setStatus, groupId, closePopUp, navigateTo);
   };
 
   if (status == responseStatus.PENDING) {

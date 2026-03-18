@@ -8,6 +8,7 @@ import ContextProvider from "./hooks/useContext";
 import GroupList from "./pages/groups/GroupList";
 import GroupRequestPage from "./pages/groups/GroupRequest";
 import GroupDetailPage from "./pages/groups/GroupDetailPage";
+import RequestListPage from "./pages/groups/RequestListPage";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <GroupRequestPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/group/request_list"
+            element={
+              <ProtectedRoute>
+                <RequestListPage />
               </ProtectedRoute>
             }
           />

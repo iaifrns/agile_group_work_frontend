@@ -9,12 +9,14 @@
   align-items: center;
 }
 
-.popup {
-  width: 550px;
+.popup-2 {
+  width: 580px;
   display: flex;
   flex-direction: column;
   gap: 24px;
   padding: 24px;
+  background-color: #2b2d31;
+  border-radius: 8px;
 }
 
 .close_popup {
@@ -169,7 +171,7 @@
 
 .selected_member {
   padding: 6px;
-  background-color: #5e5e5e;
+  background-color: #3a3a3a;
   border-radius: 8px;
   display: flex;
   gap: 8px;
@@ -177,7 +179,7 @@
 }
 
 .selected_member p {
-  color: #aeb4b9;
+  color: white;
   font-size: 13px;
 }
 
