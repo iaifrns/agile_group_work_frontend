@@ -10,13 +10,17 @@ import { getGroupDetailInfo } from "./services/getGroupDetailInfo";
 import { stringTo6Code } from "../../services/generateCodeId";
 import ConfirmationPopup from "../../components/ConfirmationPopup";
 import { deleteGroup } from "./services/deleteGroup";
+import { removeMemeberFromGroup } from "./services/removeMemberFromGroup";
 
 const GroupDetailPage = () => {
   const [status, setStatus] = useState(responseStatus.PENDING);
   const [groupDetail, setGroupDetail] = useState();
   const navigatorTo = useNavigate();
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
+  const [showRemoveMemberPopup, setShowRemoveMemberPopup] = useState(false);
   const [deleteLoader, setDeleteLoader] = useState();
+  const [removeMemberLoader, setRemoveMemberLoader] = useState();
+  const [selectedMember, setSelectedMember] = useState({ id: "", name: "" });
 
   const { activeGroup, id, setActiveGroup, studentGroups, setStudentGroups } =
     useContext(Context);
@@ -43,6 +47,11 @@ const GroupDetailPage = () => {
     );
   };
 
+  const handleSelectMember = (id, name) => {
+    setShowRemoveMemberPopup(true);
+    setSelectedMember({ id, name });
+  };
+
   const handleDeleteGroup = () => {
     deleteGroup(
       setDeleteLoader,
@@ -51,6 +60,17 @@ const GroupDetailPage = () => {
       setStudentGroups,
       studentGroups,
       navigatorTo,
+    );
+  };
+
+  const handleRemoveMember = () => {
+    removeMemeberFromGroup(
+      activeGroup.id,
+      selectedMember.id,
+      setRemoveMemberLoader,
+      setGroupDetail,
+      groupDetail,
+      setShowRemoveMemberPopup
     );
   };
 
@@ -64,6 +84,16 @@ const GroupDetailPage = () => {
           loader={deleteLoader}
         />
       )}
+
+      {showRemoveMemberPopup && (
+        <ConfirmationPopup
+          message={`A you sure you want to remove ${selectedMember.name} from the group`}
+          close={() => setShowRemoveMemberPopup(false)}
+          confirm={handleRemoveMember}
+          loader={removeMemberLoader}
+        />
+      )}
+
       <div className="layout">
         <div className="main-content">
           <div className="page-header">
@@ -151,7 +181,17 @@ const GroupDetailPage = () => {
                   </div>
                   {groupDetail.admin != student.id &&
                     groupDetail.admin == id && (
-                      <span className="btn-remove">Remove</span>
+                      <span
+                        className="btn-remove"
+                        onClick={() =>
+                          handleSelectMember(
+                            student.id,
+                            student.firstName + " " + student.lastName,
+                          )
+                        }
+                      >
+                        Remove
+                      </span>
                     )}
                 </div>
               ))}
