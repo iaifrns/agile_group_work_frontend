@@ -11,6 +11,7 @@ import { stringTo6Code } from "../../services/generateCodeId";
 import ConfirmationPopup from "../../components/ConfirmationPopup";
 import { deleteGroup } from "./services/deleteGroup";
 import { removeMemeberFromGroup } from "./services/removeMemberFromGroup";
+import StudentAddMemberList from "./components/StudentAddMemberList";
 
 const GroupDetailPage = () => {
   const [status, setStatus] = useState(responseStatus.PENDING);
@@ -21,6 +22,7 @@ const GroupDetailPage = () => {
   const [deleteLoader, setDeleteLoader] = useState();
   const [removeMemberLoader, setRemoveMemberLoader] = useState();
   const [selectedMember, setSelectedMember] = useState({ id: "", name: "" });
+  const [showAddMemberPopup, setShowAddMemberPopup] = useState(false);
 
   const { activeGroup, id, setActiveGroup, studentGroups, setStudentGroups } =
     useContext(Context);
@@ -70,13 +72,20 @@ const GroupDetailPage = () => {
       setRemoveMemberLoader,
       setGroupDetail,
       groupDetail,
-      setShowRemoveMemberPopup
+      setShowRemoveMemberPopup,
     );
   };
 
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
-
+      {showAddMemberPopup && (
+        <StudentAddMemberList
+          groupId={activeGroup.id}
+          close={() => setShowAddMemberPopup(false)}
+          setGroupDetail={setGroupDetail}
+          groupDetail={groupDetail}
+        />
+      )}
       {showConfirmPopup && (
         <ConfirmationPopup
           message={"A you sure you want to delete this group"}
@@ -158,7 +167,12 @@ const GroupDetailPage = () => {
                   </button>
                 )}
                 {groupDetail.admin == id && (
-                  <button className="btn-add">+ Add Member</button>
+                  <button
+                    className="btn-add"
+                    onClick={() => setShowAddMemberPopup(true)}
+                  >
+                    + Add Member
+                  </button>
                 )}
               </div>
             </div>
