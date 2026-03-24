@@ -76,6 +76,7 @@ const GroupDetailPage = () => {
 
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
+
       {showConfirmPopup && (
         <ConfirmationPopup
           message={"A you sure you want to delete this group"}
@@ -127,7 +128,7 @@ const GroupDetailPage = () => {
 
             <div className="info-row">
               <span className="info-label">Created Date</span>
-              <span className="info-value">{groupDetail.createdAt}</span>
+              <span className="info-value">{Date(groupDetail.createdAt)}</span>
             </div>
 
             <div className="info-row">
