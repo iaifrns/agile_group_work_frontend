@@ -172,7 +172,7 @@ const GroupTasksPage = () => {
           </div>
         </div>
       </div>
-      <script>
+      {/* <script>
         // User menu dropdown toggle
         const userMenu = document.getElementById('userMenu');
         
@@ -222,7 +222,7 @@ const GroupTasksPage = () => {
                 alert('Task details would open here.');
             });
         });
-    </script>
+    </script> */}
     </div>
   );
 };
