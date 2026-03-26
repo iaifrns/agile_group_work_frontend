@@ -1,0 +1,352 @@
+
+        body{
+            margin: 0;
+            font-family: sans-serif;
+            color: #0f110f;
+            background: radial-gradient(circle at 20% 20%, #1E1F25, #0f1117);
+        }
+
+        .container {
+            display: flex;
+            gap: 40px;
+            padding: 50px;
+            background: #0f110f;
+        }
+
+        .left {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .card {
+            background: #1E1F25;
+            border-radius: 20px;
+            padding: 25px;
+            color: #ffffff;
+        }
+
+        .big {
+            padding: 30px;
+        }
+
+        .outline {
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .tag {
+            background: #2c2d36;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+
+        .primary {
+            background: #5051F9;
+        }
+
+        .divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 20px 0;
+        }
+
+        .task-info {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .task-info span{
+            font-size: 12px;
+            color: #8A8F9C;   
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .task-info p{
+            color: #ffffff;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .status {
+            color: #1DA7FF;
+        }
+
+
+        .progress .label {
+            font-size: 12px;
+            color: #aaa;
+        }
+
+        .percent {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .bar {
+            height: 6px;
+            background: #2a2a35;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .fill {
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, #5051F9, #1DA7FF);
+        }
+
+
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .feedback-title{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feedback-title h3{
+            font-size: 18px
+        }
+
+        .count {
+            background: #e5e5e5;
+            color: #333;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .comment {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .avatar.gradient {
+            background: #5051F9;
+        }
+
+        .name{
+            font-weight: 600;
+        }
+
+        .time{
+            margin-left: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .text{
+            margin-top: 5px;
+            list-style: 1.6;
+            color: #ccc;
+        }
+
+        .divider{
+            margin: 20px 0;
+            height: 1px;
+            background: #333;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            background: #2a2a35;
+            border-radius: 30px;
+            padding: 6px 10px;
+        }
+
+        .input-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: white;
+            padding: 10px;
+        }
+
+        .input-box input:focus{
+            outline: none;
+        }
+
+        .input-box button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #5051F9, #1DA7FF);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .member {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #aaa;
+        }
+
+        .dot.blue {
+            background: #1DA7FF;
+        }
+
+        .dot.purple {
+            background: #5051F9;
+        }
+
+        .manage {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            border-radius: 12px;
+            border: none;
+        }
+
+        .progress-card {
+            border-radius: 24px;
+            padding: 28px;
+            background: linear-gradient(145deg, #23242c, #1a1b22);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .progress-title {
+            font-size: 12px;
+            color: #888;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 12px;
+        }
+
+        .percent {
+            font-size: 32px;  
+            font-weight: 700;
+        }
+
+        .milestone {
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        .progress-bar {
+            height: 5px;  
+            background: #2a2a35;
+            border-radius: 10px;
+            margin-bottom: 18px;
+        }
+
+        .progress-fill {
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(90deg, #5051F9, #1DA7FF);
+            border-radius: 10px;
+        }
+
+        .progress-list {
+            list-style: none; 
+            padding: 0;
+        }
+
+        .progress-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: #ddd;
+        }
+
+        .progress-list li::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #5051F9; 
+            display: inline-block;
+        }
+
+        .team-card {
+            border-radius: 24px;
+            padding: 30px;
+            background: linear-gradient(145deg, #23242c, #1a1b22);
+        }
+
+        .avatar-circle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .avatar-circle.blue {
+            background: linear-gradient(135deg, #1DA7FF, #4cc2ff);
+        }
+
+        .avatar-circle.purple {
+            background: linear-gradient(135deg, #5051F9, #7b7cff);
+        }
+
+        .name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .role {
+            font-size: 13px;
+            color: #888;
+        }
+
+        .manage-btn {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            border-radius: 20px;
+            background: #e5e5e5;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    
