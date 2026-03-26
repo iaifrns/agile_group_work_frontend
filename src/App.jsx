@@ -9,6 +9,7 @@ import GroupList from "./pages/groups/GroupList";
 import GroupRequestPage from "./pages/groups/GroupRequest";
 import GroupDetailPage from "./pages/groups/GroupDetailPage";
 import RequestListPage from "./pages/groups/RequestListPage";
+import TaskDetailPage from "./pages/groups/DeatilsFeedbackPage";
 
 function App() {
   return (
@@ -55,7 +56,16 @@ function App() {
             path="/group/request_list"
             element={
               <ProtectedRoute>
-                <RequestListPage />
+                {/* <RequestListPage /> */}
+                <TaskDetailPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/task/detail"
+            element={
+              <ProtectedRoute>
+                <TaskDetailPage />
               </ProtectedRoute>
             }
           />

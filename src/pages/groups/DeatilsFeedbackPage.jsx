@@ -5,12 +5,9 @@ import "./css/taskDetail.css";
 const TaskDetailPage = () => {
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
-      <main className="main">
-
-        <div className="container">
-
+      
+        <div className="task-detail-container">
           <div className="left">
-
             <div className="card big">
               <div className="tags">
                 <span className="tag primary">MEDIUM PRIORITY</span>
@@ -21,9 +18,7 @@ const TaskDetailPage = () => {
 
               <div className="desc-block">
                 <span className="desc-title">Description</span>
-                <p>
-                  Detailed information about this specific task.
-                </p>
+                <p>Detailed information about this specific task.</p>
               </div>
 
               <div className="divider"></div>
@@ -62,9 +57,7 @@ const TaskDetailPage = () => {
                   <p className="name">
                     Alex Long <span className="time">2 hours ago</span>
                   </p>
-                  <p className="text">
-                    The initial wireframes look great!
-                  </p>
+                  <p className="text">The initial wireframes look great!</p>
                 </div>
               </div>
 
@@ -74,9 +67,7 @@ const TaskDetailPage = () => {
                   <p className="name">
                     Sarah Miller <span className="time">Yesterday</span>
                   </p>
-                  <p className="text">
-                    Updated the color contrast ratios.
-                  </p>
+                  <p className="text">Updated the color contrast ratios.</p>
                 </div>
               </div>
 
@@ -85,11 +76,9 @@ const TaskDetailPage = () => {
                 <button>+</button>
               </div>
             </div>
-
           </div>
 
           <div className="right">
-
             <div className="card progress-card">
               <p className="progress-title">TASK PROGRESS</p>
 
@@ -138,12 +127,8 @@ const TaskDetailPage = () => {
 
               <button className="manage-btn">Manage Roles</button>
             </div>
-
           </div>
-
         </div>
-
-      </main>
     </DashboardLayout>
   );
 };
