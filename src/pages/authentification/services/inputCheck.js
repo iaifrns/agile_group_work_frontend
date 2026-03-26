@@ -154,7 +154,9 @@ const registerInputCheck = (registerData, setResgisterData) => {
       });
       break;
 
-    case registerData.confirmPassword.value === registerData.password.value:
+    case registerData.confirmPassword.value.length !==
+      registerData.password.value.length &&
+      !registerData.confirmPassword.value.includes(registerData.password.value):
       setResgisterData({
         ...registerData,
         confirmPassword: {
