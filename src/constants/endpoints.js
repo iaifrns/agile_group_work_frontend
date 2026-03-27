@@ -14,3 +14,4 @@ export const requestUrl = baseBackendUrl + 'group_request/'
 export const deleteRequestUrl = baseBackendUrl + 'group_request/delete_student_request'
 export const getStudentRequestUrl = baseBackendUrl + 'group_request/student_request'
 export const getAllStudentNotInGroupUrl = baseBackendUrl + 'student/student_not_in_group/'
+export const getNotificationsUrl = baseBackendUrl + "notification/student_notification"

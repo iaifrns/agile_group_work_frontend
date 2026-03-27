@@ -7,7 +7,7 @@ import NotificationIcon from "../../assets/icons/notification";
 import { fakeNotification } from "../../mock/notification";
 
 const Topbar = () => {
-  const { name, activeGroup, studentGroups, setActiveGroup } =
+  const { name, activeGroup, studentGroups, setActiveGroup, notifications } =
     useContext(Context);
   const [showDropDown, setShowDropDown] = useState(false);
   const [showNotificationDropDown, setShowNotificationDropDown] =
@@ -20,14 +20,14 @@ const Topbar = () => {
         <div style={{ position: "relative" }} onClick={()=>setShowNotificationDropDown(true)} onMouseLeave={()=>setShowNotificationDropDown(false)}>
           <div className="notificaion_display">
             <NotificationIcon c={"white"} />
-            <p className="count_notification">2</p>
+            <p className="count_notification">{notifications.length}</p>
           </div>
           {showNotificationDropDown && (
             <div className="notification_list">
-              {fakeNotification.map((text, ind) => (
-                <div className="notification_item_info" key={ind + text}>
-                  <p className="text">{text}</p>
-                  <p className="date">03/09/2025</p>
+              {notifications.map((notis, ind) => (
+                <div className="notification_item_info" key={ind + notis.id}>
+                  <p className="text">{notis.message}</p>
+                  <p className="date">{`${notis.createdAt}`.split('T')[0]}</p>
                 </div>
               ))}
             </div>

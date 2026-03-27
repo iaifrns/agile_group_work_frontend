@@ -7,16 +7,20 @@ import { getAllStudentGroup } from "../pages/authentification/services/getAllStu
 import { responseStatus } from "../assets/enum/responseStatus";
 import { Context } from "../hooks/useContext";
 import LoaderPage from "../components/LoaderPage";
+import { getNotification } from "../services/getNotifications";
 
 const DashboardLayout = ({ children, active }) => {
   const [status, setStatus] = useState(responseStatus.PENDING);
 
-  const { setStudentGroups, setActiveGroup, run, setRun } = useContext(Context);
+  const { setStudentGroups, setActiveGroup, run, setRun, setNotifications } =
+    useContext(Context);
 
   useEffect(() => {
-    console.log("what the fuck", run);
     if (!run) {
-      getAllStudentGroup(setStatus, setStudentGroups, setActiveGroup);
+      Promise.all([
+        getAllStudentGroup(setStatus, setStudentGroups, setActiveGroup),
+        getNotification(setStatus, setNotifications),
+      ]);
       setRun(true);
     } else {
       setStatus(responseStatus.SUCCESS);

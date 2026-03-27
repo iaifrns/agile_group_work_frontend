@@ -11,6 +11,8 @@ export const Context = createContext({
   setActiveGroup: (e) => {},
   run: false,
   setRun: (e) => {},
+  notifications: [],
+  setNotifications: (e) => {}
 });
 
 const ContextProvider = ({ children }) => {
@@ -19,6 +21,7 @@ const ContextProvider = ({ children }) => {
   const [studentGroups, setStudentGroups] = useState([]);
   const [activeGroup, setActiveGroup] = useState({});
   const [run, setRun] = useState(false);
+  const [notifications, setNotifications] = useState([])
 
   return (
     <Context.Provider
@@ -33,6 +36,8 @@ const ContextProvider = ({ children }) => {
         setActiveGroup,
         run,
         setRun,
+        setNotifications,
+        notifications
       }}
     >
       {children}

@@ -117,9 +117,10 @@
 .notification_item_info .text {
   font-size: 14px;
   font-weight: 600;
+  color: white;
   width: 100%;
 }
 
 .notification_item_info .date {
-  font-size: 14px;
+  font-size: 12px;
 }
