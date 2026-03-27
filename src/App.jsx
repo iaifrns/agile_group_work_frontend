@@ -10,6 +10,9 @@ import GroupRequestPage from "./pages/groups/GroupRequest";
 import GroupDetailPage from "./pages/groups/GroupDetailPage";
 import RequestListPage from "./pages/groups/RequestListPage";
 import TaskDetailPage from "./pages/groups/DeatilsFeedbackPage";
+import { io } from "socket.io-client";
+
+export const socket = io("http://localhost:5001/", { withCredentials: true });
 
 function App() {
   return (

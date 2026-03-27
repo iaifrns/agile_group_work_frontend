@@ -2,12 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import Sidebar from "../pages/authentification/Sidebar";
 import Topbar from "../pages/authentification/Topbar";
 
+import { responseStatus } from "../assets/enum/responseStatus";
+import LoaderPage from "../components/LoaderPage";
+import { Context } from "../hooks/useContext";
 import "../pages/authentification/css/ProfilePage.css";
 import { getAllStudentGroup } from "../pages/authentification/services/getAllStudentGroups";
-import { responseStatus } from "../assets/enum/responseStatus";
-import { Context } from "../hooks/useContext";
-import LoaderPage from "../components/LoaderPage";
-import { getNotification } from "../services/getNotifications";
+import { getUnReadNotifications } from "../services/getUnReadNotif";
 
 const DashboardLayout = ({ children, active }) => {
   const [status, setStatus] = useState(responseStatus.PENDING);
@@ -19,7 +19,7 @@ const DashboardLayout = ({ children, active }) => {
     if (!run) {
       Promise.all([
         getAllStudentGroup(setStatus, setStudentGroups, setActiveGroup),
-        getNotification(setStatus, setNotifications),
+        getUnReadNotifications(setStatus, setNotifications),
       ]);
       setRun(true);
     } else {
