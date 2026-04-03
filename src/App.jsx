@@ -9,7 +9,7 @@ import GroupList from "./pages/groups/GroupList";
 import GroupRequestPage from "./pages/groups/GroupRequest";
 import GroupDetailPage from "./pages/groups/GroupDetailPage";
 import RequestListPage from "./pages/groups/RequestListPage";
-import TaskDetailPage from "./pages/groups/DeatilsFeedbackPage";
+import TaskDetailPage from "./pages/tasks/DeatilsFeedbackPage";
 import { io } from "socket.io-client";
 import GroupTasksPage from "./pages/tasks/GroupTaskPage";
 

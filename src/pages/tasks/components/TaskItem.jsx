@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Category, Importance } from "../../../mock/taskList";
+import { useNavigate } from "react-router-dom";
 
 const TaskItem = ({ importance, title, groupName, desc, date, category }) => {
-
   const [style, setStyle] = useState({
     container: "",
     categ: "",
     imp: "",
   });
+
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     let newStyle = {
@@ -54,15 +56,20 @@ const TaskItem = ({ importance, title, groupName, desc, date, category }) => {
         newStyle = { ...newStyle, imp: "priority-medium" };
         break;
       case Importance.LOW == importance:
-        newStyle = { ...newStyle, imp: "priority-high" };
+        newStyle = { ...newStyle, imp: "priority-low" };
         break;
     }
 
-    setStyle(newStyle)
+    setStyle(newStyle);
   }, []);
-  
+
   return (
-    <div className={"task-card " + style.container}>
+    <div
+      className={"task-card " + style.container}
+      onClick={() => {
+        navigateTo("/task/detail");
+      }}
+    >
       <span className={"task-priority " + style.imp}>{importance}</span>
       <div className="task-header">
         <div>

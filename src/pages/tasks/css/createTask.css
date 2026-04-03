@@ -1,0 +1,185 @@
+.popup-container-task {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-task-create {
+  width: 580px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  background-color: #2b2d31;
+  border-radius: 8px;
+  margin: 24px;
+}
+
+.close-task-popup {
+    display: flex;
+    justify-content: end;
+}
+
+.popup-task-header {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+}
+
+.task-create-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+}
+
+.task-create-desc {
+    color: white;
+    font-weight: 400;
+}
+
+.task-create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-input-label{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.task-create-label {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.task-create-input {
+    border-radius: 8px;
+    padding: 16px;
+    width: 100%;
+    color: white;
+    background-color: #31353a;
+    border: 0px;
+}
+
+.task-create-input::placeholder {
+    color: gray
+}
+
+.task-create-input:focus{
+    border: 1px solid gray;
+    background-color: #2b2d31;
+}
+
+.task-create-select{
+    background-color: #31353a;
+    color: white;
+    font-weight: 400;
+    padding: 16px;
+    border-radius: 8px;
+    border: 0px;
+    font-size: 15px;
+}
+
+.task-assign-box{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.student-assign-container {
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    background-color: #31353a;
+    border: 1px solid gray;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    min-height: 80px;
+}
+
+.student-task-list {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 250px;
+    overflow-y: scroll;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+.task-create-button{
+    border: 0px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #5051f9;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.task-create-button:hover {
+    background-color: #4545d8;
+}
+
+.group-member-task {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.group-member-task:hover {
+    background-color: #31353a;
+}
+
+.student-task-avatar {
+    border-radius: 9999px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+
+.student-task-name {
+    font-weight: 600;
+}
+
+.student-task-choosed{
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 6px;
+    border-radius: 8px;
+    background-color: rgb(60, 60, 60);
+}
+
+.student-choosed-avatar{
+    border-radius: 9999px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+
+.error-message {
+    color: red;
+    font-size: 11px;
+    font-weight: 500;
+}

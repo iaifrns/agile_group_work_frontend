@@ -25,3 +25,5 @@ export const getUnReadNotificationUrl =
 
 export const updateNotifications =
   baseBackendUrl + "notification/modify";
+
+export const createTaskUrl = baseBackendUrl + 'tasks/create'

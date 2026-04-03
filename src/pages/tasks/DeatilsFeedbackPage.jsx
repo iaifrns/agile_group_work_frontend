@@ -1,11 +1,27 @@
+import { useNavigate } from "react-router-dom";
+import BackButtonLogo from "../../assets/icons/backButton";
+import MenuIcon from "../../assets/icons/MenuIcon";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import DashboardLayout from "../../layout/Dashboard";
 import "./css/taskDetail.css";
 
 const TaskDetailPage = () => {
+  const navigateTo = useNavigate();
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
-      
+      <div className="main-container-detail-task">
+        <div className="header-content">
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <div
+              onClick={() => navigateTo(-1)}
+              style={{ display: "flex", justifyContent: "center" }}
+            >
+              <BackButtonLogo c={"white"} />
+            </div>
+            <p>Back</p>
+          </div>
+          <MenuIcon c={"white"} />
+        </div>
         <div className="task-detail-container">
           <div className="left">
             <div className="card big">
@@ -14,10 +30,12 @@ const TaskDetailPage = () => {
                 <span className="tag">GENERAL</span>
               </div>
 
-              <h2>Task Details</h2>
+              <h2 style={{ width: "100%", textAlign: "start" }}>
+                Task Details
+              </h2>
 
               <div className="desc-block">
-                <span className="desc-title">Description</span>
+                <span className="desc-title">Description:</span>
                 <p>Detailed information about this specific task.</p>
               </div>
 
@@ -29,12 +47,8 @@ const TaskDetailPage = () => {
                   <p>April 15, 2025</p>
                 </div>
                 <div>
-                  <span>ESTIMATED TIME</span>
-                  <p>12 Hours</p>
-                </div>
-                <div>
                   <span>STATUS</span>
-                  <p className="status">In Progress</p>
+                  <p style={{color: '#1da7ff'}}>In Progress</p>
                 </div>
                 <div>
                   <span>PROJECT</span>
@@ -50,7 +64,10 @@ const TaskDetailPage = () => {
                 </div>
                 <span className="count">24 Comments</span>
               </div>
-
+              <div className="input-box">
+                <input placeholder="Type your comment..." />
+                <button>+</button>
+              </div>
               <div className="comment">
                 <div className="avatar gradient">AL</div>
                 <div className="comment-body">
@@ -69,11 +86,6 @@ const TaskDetailPage = () => {
                   </p>
                   <p className="text">Updated the color contrast ratios.</p>
                 </div>
-              </div>
-
-              <div className="input-box">
-                <input placeholder="Type your comment..." />
-                <button>+</button>
               </div>
             </div>
           </div>
@@ -129,6 +141,7 @@ const TaskDetailPage = () => {
             </div>
           </div>
         </div>
+      </div>
     </DashboardLayout>
   );
 };

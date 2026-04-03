@@ -43,7 +43,7 @@ const Sidebar = ({ active }) => {
     <aside className="sidebar">
       <div className="logo">
         <img src={Logo} alt="logo" />
-        <span>OCTOM.</span>
+        <span>Linko.</span>
       </div>
       <nav className="nav">
         {Object.values(menu).map((icon, idx) => (

@@ -1,28 +1,50 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import { taskCategory } from "../../constants/taskCategory";
+import { Context } from "../../hooks/useContext";
 import DashboardLayout from "../../layout/Dashboard";
+import { fakeTasks } from "../../mock/taskList";
+import CreateTask from "./components/CreateTask";
 import TaskInfoContainer from "./components/TaskInfoContainer";
+import TaskItem from "./components/TaskItem";
 import TopMenuItem from "./components/TopMenuItem";
 import "./css/groupTaskList.css";
-import { fakeTasks } from "../../mock/taskList";
-import TaskItem from "./components/TaskItem";
-import { Context } from "../../hooks/useContext";
+import { responseStatus } from "../../assets/enum/responseStatus";
+import LoaderPage from "../../components/LoaderPage";
+import { getGroupDetailInfo } from "../groups/services/getGroupDetailInfo";
 
 const GroupTasksPage = () => {
   const [activeMenu, setActiveMenu] = useState(0);
-  const {activeGroup} = useContext(Context)
+  const { activeGroup } = useContext(Context);
+  const [status, setStatus] = useState(responseStatus.PENDING);
+  const [groupDetail, setGroupDetail] = useState();
+  const [showPopup, setShowPopUp] = useState(false)
+
+  useEffect(() => {
+    getGroupDetailInfo(activeGroup.id, setStatus, setGroupDetail);
+  }, [activeGroup]);
+
+  if (status == responseStatus.PENDING) {
+    return (
+      <DashboardLayout active={ActiveSideBarMenu.Task}>
+        <LoaderPage />
+      </DashboardLayout>
+    );
+  }
+
   return (
     <DashboardLayout active={ActiveSideBarMenu.Task}>
+      {showPopup && 
+      <CreateTask groupMembers={groupDetail.members} gid={groupDetail.id} close={()=>setShowPopUp(false)} />}
       <div className="main-content">
         <div className="page-header">
           <div className="page-title-section">
-            <h1>My Tasks</h1>
+            <h1>Group Commitments</h1>
             <p className="page-subtitle">
               Manage and track your assignments and deadlines
             </p>
           </div>
-          <button className="btn-add-task">+ Add New Task</button>
+          <button className="btn-add-task" onClick={()=>setShowPopUp(true)}>+ Add New Task</button>
         </div>
 
         <div className="stats-row">
@@ -54,11 +76,10 @@ const GroupTasksPage = () => {
               desc={task.desc}
               date={task.createdAt}
               category={task.category}
-              key={ind+task.title}
+              key={ind + task.title}
               groupName={activeGroup.name}
             />
           ))}
-          
         </div>
         {/* <script>
         // User menu dropdown toggle
