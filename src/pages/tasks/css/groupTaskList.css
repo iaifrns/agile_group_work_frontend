@@ -68,9 +68,21 @@
 .filter-tabs {
   display: flex;
   gap: 8px;
+}
+
+.filter-task-container{
   margin-bottom: 24px;
   border-bottom: 1px solid #2a2d31;
   padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.filter-identity {
+  display: flex;
+  align-items: center;
+  gap: 0;
 }
 
 .tab {
@@ -221,6 +233,11 @@
 .priority-low {
   background: rgba(87, 242, 135, 0.15);
   color: #57f287;
+}
+
+.priority-revision {
+  background: rgba(128, 87, 242, 0.15);
+  color: #5f57f2;
 }
 
 .stats-row {

@@ -27,3 +27,5 @@ export const updateNotifications =
   baseBackendUrl + "notification/modify";
 
 export const createTaskUrl = baseBackendUrl + 'tasks/create'
+export const getATaskUrl = baseBackendUrl + 'tasks/'
+export const updateATaskUrl = baseBackendUrl + 'tasks/update/'

@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
-import { Category, Importance } from "../../../mock/taskList";
 import { useNavigate } from "react-router-dom";
+import { TaskPriority, TaskSTatus } from "../../../constants/taskStatus";
 
-const TaskItem = ({ importance, title, groupName, desc, date, category }) => {
+const TaskItem = ({
+  importance,
+  title,
+  groupName,
+  desc,
+  date,
+  category,
+  id,
+}) => {
   const [style, setStyle] = useState({
     container: "",
     categ: "",
@@ -18,28 +26,28 @@ const TaskItem = ({ importance, title, groupName, desc, date, category }) => {
       imp: "",
     };
     switch (true) {
-      case Category.PENDING == category:
+      case TaskSTatus.TODO == category:
         newStyle = {
           ...newStyle,
           container: "pending",
           categ: "status-pending",
         };
         break;
-      case Category.COMPLETE == category:
+      case TaskSTatus.COMPLETED == category:
         newStyle = {
           ...newStyle,
           container: "completed",
           categ: "status-completed",
         };
         break;
-      case Category.INPROGRESS == category:
+      case TaskSTatus.INPROGRESS == category:
         newStyle = {
           ...newStyle,
           container: "in-progress",
           categ: "status-in-progress",
         };
         break;
-      case Category.OVERDUE == category:
+      case "overdue" == category:
         newStyle = {
           ...newStyle,
           container: "overdue",
@@ -49,14 +57,17 @@ const TaskItem = ({ importance, title, groupName, desc, date, category }) => {
     }
 
     switch (true) {
-      case Importance.HIGH == importance:
+      case TaskPriority.EXERCISE == importance:
         newStyle = { ...newStyle, imp: "priority-high" };
         break;
-      case Importance.MEDIUM == importance:
+      case TaskPriority.PROJECT_WORK == importance:
         newStyle = { ...newStyle, imp: "priority-medium" };
         break;
-      case Importance.LOW == importance:
+      case TaskPriority.READING == importance:
         newStyle = { ...newStyle, imp: "priority-low" };
+        break;
+      case TaskPriority.REVISION == importance:
+        newStyle = { ...newStyle, imp: "priority-revision" };
         break;
     }
 
@@ -67,7 +78,7 @@ const TaskItem = ({ importance, title, groupName, desc, date, category }) => {
     <div
       className={"task-card " + style.container}
       onClick={() => {
-        navigateTo("/task/detail");
+        navigateTo("/task/detail/"+id);
       }}
     >
       <span className={"task-priority " + style.imp}>{importance}</span>

@@ -9,7 +9,7 @@ import { createTask } from "../services/createTask";
 
 const today = new Date().toISOString().split("T")[0];
 
-const CreateTask = ({ groupMembers, gid, close }) => {
+const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
   const [studentList, setStudentList] = useState([]);
   const [memberList, setMemberList] = useState(groupMembers);
 
@@ -67,7 +67,7 @@ const CreateTask = ({ groupMembers, gid, close }) => {
         }),
         groupId: gid,
         dueDate: formData.due.value + 'T'+new Date().toISOString().split("T")[1],
-      }, close);
+      }, close, tasks, setTasks);
     } else if (formData.desc.value.length < 1) {
       setFormData({
         ...formData,

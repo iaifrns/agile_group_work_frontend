@@ -8,7 +8,7 @@ import TasksIcon from "../assets/icons/tasks";
 
 export const ActiveSideBarMenu = {
   Dashboard: { id: 1, name: "Dashboard", Icon: DashboardIcon, path: '#' },
-  Task: { id: 2, name: "Commitments", Icon: TasksIcon, path: "/task/list"},
+  Task: { id: 2, name: "Group Commitments", Icon: TasksIcon, path: "/task/list"},
   GroupList: {
     id: 3,
     name: "Browse Existing Groups or Launch Yours",

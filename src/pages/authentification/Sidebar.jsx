@@ -33,7 +33,7 @@ const Sidebar = ({ active }) => {
 
   useEffect(() => {
     if (studentGroups.length < 1) {
-      const { GroupDetail, ...newMenu } = ActiveSideBarMenu;
+      const { GroupDetail, Task, ...newMenu } = ActiveSideBarMenu;
       setMenu(newMenu);
     } else {
       setMenu(ActiveSideBarMenu);

@@ -1,6 +1,6 @@
 export const taskCategory = [
   "All Tasks",
-  "Pending",
+  "Todo",
   "In Progress",
   "Completed",
   "Overdue",

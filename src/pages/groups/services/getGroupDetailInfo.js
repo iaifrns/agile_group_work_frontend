@@ -7,7 +7,6 @@ export const getGroupDetailInfo = async (groupId, setStatus, setGroupInfo) => {
     const response = await axios.get(getAllGroupsUrl + groupId + "/detail", {
       withCredentials: true,
     });
-    console.log(response.data)
     setGroupInfo(response.data.data)
     setStatus(responseStatus.SUCCESS)
   } catch (e) {
