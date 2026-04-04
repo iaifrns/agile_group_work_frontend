@@ -9,7 +9,6 @@ export const createTask = async (setStatus, data, close, tasks, setTasks) => {
         const response = await axios.post(createTaskUrl, {...data}, {withCredentials: true})
         setStatus(responseStatus.SUCCESS)
         alert(response.data.message)
-        console.log(response.data.data)
         setTasks([...tasks, {
             id: response.data.data.id,
             title: response.data.data.title,

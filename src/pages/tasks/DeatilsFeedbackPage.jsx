@@ -4,7 +4,7 @@ import MenuIcon from "../../assets/icons/MenuIcon";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import DashboardLayout from "../../layout/Dashboard";
 import "./css/taskDetail.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { responseStatus } from "../../assets/enum/responseStatus";
 import { getTaskDetail } from "./services/getATaskDetail";
 import LoaderPage from "../../components/LoaderPage";
@@ -13,15 +13,25 @@ import { TaskSTatus } from "../../constants/taskStatus";
 import UpdateStatus from "./components/UpdateStatus";
 import DeleteIcon from "../../assets/icons/delete";
 import { deleteTask } from "./services/deleteTask";
+import { Context } from "../../hooks/useContext";
+import { createFeedback } from "./services/createFeedback";
+import Loader from "../../assets/icons/loader";
+import AddIcon from "../../assets/icons/add";
+import { timeAgo } from "../../services/timedifference";
+import UpdateAssign from "./components/updateAssign";
 
 const TaskDetailPage = () => {
   const navigateTo = useNavigate();
   const { taskId } = useParams();
+  const { activeGroup, id } = useContext(Context);
 
   const [task, setTask] = useState();
   const [status, setStatus] = useState(responseStatus.PENDING);
   const [showUpdateStatus, setShowUpdateStatus] = useState(false);
   const [showDropdown, setShowDropDown] = useState(false);
+  const [comment, setComment] = useState("");
+  const [feedbackLoader, setFeedbackLoader] = useState();
+  const [showAssignPopup, setShowAssignPopup] = useState(false);
 
   useEffect(() => {
     getTaskDetail(setStatus, setTask, taskId);
@@ -38,12 +48,20 @@ const TaskDetailPage = () => {
   };
 
   const handleDelete = () => {
-    deleteTask(setStatus, taskId, navigateTo)
-  }
+    deleteTask(setStatus, taskId, navigateTo);
+  };
+
+  const setFeedback = (feedback) => {
+    setTask({ ...task, feedBack: [feedback, ...task.feedBack] });
+  };
+
+  const handleCreateFeedBack = () => {
+    createFeedback(taskId, comment, setFeedbackLoader, setComment, setFeedback);
+  };
 
   if (status == responseStatus.PENDING) {
     return (
-      <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
+      <DashboardLayout active={ActiveSideBarMenu.Task}>
         <div className="main-container-detail-task">
           {" "}
           <LoaderPage />{" "}
@@ -53,7 +71,17 @@ const TaskDetailPage = () => {
   }
 
   return (
-    <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
+    <DashboardLayout active={ActiveSideBarMenu.Task}>
+      {showAssignPopup && (
+        <UpdateAssign
+          members={task.students}
+          groupId={activeGroup.id}
+          close={() => setShowAssignPopup(false)}
+          task={task}
+          taskId={taskId}
+          setTask={setTask}
+        />
+      )}
       {showUpdateStatus && (
         <UpdateStatus
           close={() => setShowUpdateStatus(false)}
@@ -73,22 +101,30 @@ const TaskDetailPage = () => {
             <p>Back</p>
           </div>
           <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-            <button
-              className="tab active"
-              onClick={() => setShowUpdateStatus(true)}
-            >
-              Update Status
-            </button>
+            {task.students.filter((student) => student.id == id).length > 0 && (
+              <button
+                className="tab active"
+                onClick={() => setShowUpdateStatus(true)}
+              >
+                Update Status
+              </button>
+            )}
+
             <div style={{ position: "relative" }}>
-              <div onClick={()=>setShowDropDown(true)}>
-              <MenuIcon c={"white"} />
+              <div onClick={() => setShowDropDown(true)}>
+                <MenuIcon c={"white"} />
               </div>
               {showDropdown && (
-                <div className="drop-down-container" onMouseLeave={()=>setShowDropDown(false)}>
-                  <div className="delete-task" onClick={handleDelete}>
-                    <DeleteIcon c={"#d02e2e"} />
-                    <p>delete</p>
-                  </div>
+                <div
+                  className="drop-down-container"
+                  onMouseLeave={() => setShowDropDown(false)}
+                >
+                  {activeGroup.admin == id && (
+                    <div className="delete-task" onClick={handleDelete}>
+                      <DeleteIcon c={"#d02e2e"} />
+                      <p>delete</p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -141,17 +177,44 @@ const TaskDetailPage = () => {
                 <span className="count">{task.feedBack.length} Comments</span>
               </div>
               <div className="input-box">
-                <input placeholder="Type your comment..." />
-                <button>+</button>
+                <input
+                  placeholder="Type your comment..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+                <button
+                  onClick={() => {
+                    if (feedbackLoader != responseStatus.PENDING) {
+                      handleCreateFeedBack();
+                    }
+                  }}
+                >
+                  {feedbackLoader == responseStatus.PENDING ? (
+                    <Loader c={"white"} />
+                  ) : (
+                    <p>
+                      <AddIcon c={"white"} />
+                    </p>
+                  )}
+                </button>
               </div>
               {task.feedBack.map((feedBack) => (
                 <div className="comment">
-                  <div className="avatar gradient">AL</div>
+                  <div className="avatar gradient">
+                    {(
+                      feedBack.student.firstName + feedBack.student.lastName
+                    ).slice(0, 2)}
+                  </div>
                   <div className="comment-body">
                     <p className="name">
-                      Alex Long <span className="time">2 hours ago</span>
+                      {feedBack.student.firstName +
+                        " " +
+                        feedBack.student.lastName}{" "}
+                      <span className="time">
+                        {timeAgo(feedBack.createdAt)}
+                      </span>
                     </p>
-                    <p className="text">The initial wireframes look great!</p>
+                    <p className="text">{feedBack.message}</p>
                   </div>
                 </div>
               ))}
@@ -191,7 +254,14 @@ const TaskDetailPage = () => {
                 </div>
               ))}
 
-              <button className="manage-btn">Manage Roles</button>
+              {activeGroup.admin == id && (
+                <button
+                  className="manage-btn"
+                  onClick={() => setShowAssignPopup(true)}
+                >
+                  Manage Roles
+                </button>
+              )}
             </div>
           </div>
         </div>

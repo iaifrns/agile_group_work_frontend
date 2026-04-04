@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { responseStatus } from "../../../assets/enum/responseStatus";
+import CloseIcon from "../../../assets/icons/close";
+import Loader from "../../../assets/icons/loader";
+import { TaskSTatus } from "../../../constants/taskStatus";
 import "../css/createTask.css";
 import "../css/updatetask.css";
-import CloseIcon from "../../../assets/icons/close";
-import { TaskSTatus } from "../../../constants/taskStatus";
-import { responseStatus } from "../../../assets/enum/responseStatus";
-import Loader from "../../../assets/icons/loader";
 import { updateTask } from "../services/updateTask";
 
 const UpdateStatus = ({ close, task, setTask }) => {

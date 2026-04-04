@@ -10,7 +10,6 @@ export const getAllTask = async (setStatus, setTaskList) => {
     });
     setTaskList(response.data.data)
     setStatus(responseStatus.SUCCESS)
-    console.log(response.data.data)
   } catch (e) {
     setStatus(responseStatus.ERROR)
     console.log(e);
