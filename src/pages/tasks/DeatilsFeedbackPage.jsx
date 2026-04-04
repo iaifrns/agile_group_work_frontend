@@ -11,6 +11,8 @@ import LoaderPage from "../../components/LoaderPage";
 import { stringToColor } from "../../services/generateColor";
 import { TaskSTatus } from "../../constants/taskStatus";
 import UpdateStatus from "./components/UpdateStatus";
+import DeleteIcon from "../../assets/icons/delete";
+import { deleteTask } from "./services/deleteTask";
 
 const TaskDetailPage = () => {
   const navigateTo = useNavigate();
@@ -19,6 +21,7 @@ const TaskDetailPage = () => {
   const [task, setTask] = useState();
   const [status, setStatus] = useState(responseStatus.PENDING);
   const [showUpdateStatus, setShowUpdateStatus] = useState(false);
+  const [showDropdown, setShowDropDown] = useState(false);
 
   useEffect(() => {
     getTaskDetail(setStatus, setTask, taskId);
@@ -34,6 +37,10 @@ const TaskDetailPage = () => {
     }
   };
 
+  const handleDelete = () => {
+    deleteTask(setStatus, taskId, navigateTo)
+  }
+
   if (status == responseStatus.PENDING) {
     return (
       <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
@@ -47,7 +54,13 @@ const TaskDetailPage = () => {
 
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>
-      {showUpdateStatus && <UpdateStatus close={()=>setShowUpdateStatus(false)} task={task} setTask={setTask} />}
+      {showUpdateStatus && (
+        <UpdateStatus
+          close={() => setShowUpdateStatus(false)}
+          task={task}
+          setTask={setTask}
+        />
+      )}
       <div className="main-container-detail-task">
         <div className="header-content">
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -60,8 +73,25 @@ const TaskDetailPage = () => {
             <p>Back</p>
           </div>
           <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
-            <button className="tab active" onClick={()=>setShowUpdateStatus(true)}>Update Status</button>
-            <MenuIcon c={"white"} />
+            <button
+              className="tab active"
+              onClick={() => setShowUpdateStatus(true)}
+            >
+              Update Status
+            </button>
+            <div style={{ position: "relative" }}>
+              <div onClick={()=>setShowDropDown(true)}>
+              <MenuIcon c={"white"} />
+              </div>
+              {showDropdown && (
+                <div className="drop-down-container" onMouseLeave={()=>setShowDropDown(false)}>
+                  <div className="delete-task" onClick={handleDelete}>
+                    <DeleteIcon c={"#d02e2e"} />
+                    <p>delete</p>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         <div className="task-detail-container">
