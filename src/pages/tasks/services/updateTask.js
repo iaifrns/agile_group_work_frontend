@@ -13,6 +13,7 @@ export const updateTask = async (setStatus, task, setTask, close) => {
         status: task.status,
         category: task.category,
         student: task.students,
+        dueDate: task.dueDate
       },
       { withCredentials: true },
     );

@@ -383,6 +383,17 @@
   cursor: pointer;
 }
 
+.update-task{
+  color: #4242aa;
+  display: flex;
+  gap: 6px;
+  cursor: pointer;
+}
+
 .delete-task:hover{
   background-color: rgba(255, 150, 150,0.2);
+}
+
+.update-task:hover{
+  background-color: rgba(66, 66, 170,0.2);
 }

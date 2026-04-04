@@ -19,6 +19,8 @@ import Loader from "../../assets/icons/loader";
 import AddIcon from "../../assets/icons/add";
 import { timeAgo } from "../../services/timedifference";
 import UpdateAssign from "./components/updateAssign";
+import UpdateTaskInfo from "./components/UpdateTask";
+import EditIcon from "../../assets/icons/edit";
 
 const TaskDetailPage = () => {
   const navigateTo = useNavigate();
@@ -32,6 +34,7 @@ const TaskDetailPage = () => {
   const [comment, setComment] = useState("");
   const [feedbackLoader, setFeedbackLoader] = useState();
   const [showAssignPopup, setShowAssignPopup] = useState(false);
+  const [showUpdateTaskPopup, setShowUpdateTaskPopup] = useState(false)
 
   useEffect(() => {
     getTaskDetail(setStatus, setTask, taskId);
@@ -72,6 +75,7 @@ const TaskDetailPage = () => {
 
   return (
     <DashboardLayout active={ActiveSideBarMenu.Task}>
+      {showUpdateTaskPopup && <UpdateTaskInfo task={task} close={()=>setShowUpdateTaskPopup(false)} setTask={setTask} />}
       {showAssignPopup && (
         <UpdateAssign
           members={task.students}
@@ -125,6 +129,10 @@ const TaskDetailPage = () => {
                       <p>delete</p>
                     </div>
                   )}
+                  <div className="update-task" onClick={()=>setShowUpdateTaskPopup(true)} >
+                    <EditIcon c={"#4242aa"} />
+                    <p>Update Task</p>
+                  </div>
                 </div>
               )}
             </div>
