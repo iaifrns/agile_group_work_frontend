@@ -7,44 +7,35 @@ import { taskCategory, TaskType } from "../../constants/taskCategory";
 import { TaskSTatus } from "../../constants/taskStatus";
 import { Context } from "../../hooks/useContext";
 import DashboardLayout from "../../layout/Dashboard";
-import { getGroupDetailInfo } from "../groups/services/getGroupDetailInfo";
 import CreateTask from "./components/CreateTask";
 import TaskInfoContainer from "./components/TaskInfoContainer";
 import TaskItem from "./components/TaskItem";
 import TopMenuItem from "./components/TopMenuItem";
 import "./css/groupTaskList.css";
 import { getAllTask } from "./services/getAllTask";
+import { getAStudent } from "../authentification/services/getStudent";
 
 const today = new Date();
 
-const GroupTasksPage = () => {
+const MyTaskPage = () => {
   const [activeMenu, setActiveMenu] = useState(0);
-  const { activeGroup, id } = useContext(Context);
+  const { activeGroup, id, handleName } = useContext(Context);
   const [status, setStatus] = useState(responseStatus.PENDING);
-  const [groupDetail, setGroupDetail] = useState();
   const [showPopup, setShowPopUp] = useState(false);
   const [taskList, setTaskList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
-  const [isGroupFilter, setIsGroupFilter] = useState(true);
+  const [student, setStudent] = useState();
 
   useEffect(() => {
     Promise.all([
-      getGroupDetailInfo(activeGroup.id, setStatus, setGroupDetail),
-      getAllTask(setStatus, setTaskList, TaskType.group, activeGroup.id),
+      getAllTask(setStatus, setTaskList, TaskType.personal),
+      getAStudent(setStatus, handleName, setStudent, id),
     ]);
   }, [activeGroup]);
 
   useEffect(() => {
-    if (isGroupFilter) {
-      setFilteredList(taskList);
-    } else {
-      setFilteredList(
-        taskList.filter((task) =>
-          task.students.some((student) => student.id === id),
-        ),
-      );
-    }
-  }, [isGroupFilter, taskList]);
+    setFilteredList(taskList);
+  }, [taskList]);
 
   const handleFilterTask = () => {
     if (activeMenu == 0) {
@@ -62,39 +53,36 @@ const GroupTasksPage = () => {
     }
   };
 
-  if (status == responseStatus.PENDING || !groupDetail) {
+  if (status == responseStatus.PENDING && !student) {
     return (
-      <DashboardLayout active={ActiveSideBarMenu.Task}>
+      <DashboardLayout active={ActiveSideBarMenu.MyCommitment}>
         <LoaderPage />
       </DashboardLayout>
     );
   }
 
   return (
-    <DashboardLayout active={ActiveSideBarMenu.Task}>
+    <DashboardLayout active={ActiveSideBarMenu.MyCommitment}>
       {showPopup && (
         <CreateTask
-          groupMembers={groupDetail.members}
-          gid={groupDetail.id}
+          groupMembers={[{id: id, student}]}
           close={() => setShowPopUp(false)}
           tasks={taskList}
           setTasks={setTaskList}
-          type={TaskType.group}
+          type={TaskType.personal}
         />
       )}
       <div className="main-content">
         <div className="page-header">
           <div className="page-title-section">
-            <h1>Group Commitments</h1>
+            <h1>My Commitments</h1>
             <p className="page-subtitle">
               Manage and track your assignments and deadlines
             </p>
           </div>
-          {groupDetail.admin == id && (
-            <button className="btn-add-task" onClick={() => setShowPopUp(true)}>
-              + Add New Task
-            </button>
-          )}
+          <button className="btn-add-task" onClick={() => setShowPopUp(true)}>
+            + Add New Task
+          </button>
         </div>
 
         <div className="stats-row">
@@ -141,20 +129,6 @@ const GroupTasksPage = () => {
               />
             ))}
           </div>
-          <div className="filter-identity">
-            <button
-              className={`tab ${isGroupFilter && "active"}`}
-              onClick={() => setIsGroupFilter(true)}
-            >
-              Group Task
-            </button>
-            <button
-              className={`tab ${!isGroupFilter && "active"}`}
-              onClick={() => setIsGroupFilter(false)}
-            >
-              My Task
-            </button>
-          </div>
         </div>
 
         <div className="tasks-grid">
@@ -189,60 +163,9 @@ const GroupTasksPage = () => {
             </>
           )}
         </div>
-        {/* <script>
-        // User menu dropdown toggle
-        const userMenu = document.getElementById('userMenu');
-        
-        userMenu.addEventListener('click', function(e) {
-            if (!e.target.closest('.dropdown-item')) {
-                this.classList.toggle('active');
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!userMenu.contains(e.target)) {
-                userMenu.classList.remove('active');
-            }
-        });
-
-        // Filter tabs
-        function filterTasks(filter) {
-            const tabs = document.querySelectorAll('.tab');
-            const cards = document.querySelectorAll('.task-card');
-            
-            // Update active tab
-            tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter cards
-            cards.forEach(card => {
-                if (filter === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    if (card.classList.contains(filter)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
-            });
-        }
-
-        // Add task button
-        document.querySelector('.btn-add-task').addEventListener('click', function() {
-            alert('Add new task functionality would open a modal here.');
-        });
-
-        // Task card click
-        document.querySelectorAll('.task-card').forEach(card => {
-            card.addEventListener('click', function() {
-                alert('Task details would open here.');
-            });
-        });
-    </script> */}
       </div>
     </DashboardLayout>
   );
 };
 
-export default GroupTasksPage;
+export default MyTaskPage;

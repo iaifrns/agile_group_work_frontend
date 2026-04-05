@@ -5,3 +5,8 @@ export const taskCategory = [
   "Completed",
   "Overdue",
 ];
+
+export const TaskType = {
+  group: 'GROUP',
+  personal: 'PERSONAL'
+}
