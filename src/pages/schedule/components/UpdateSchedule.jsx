@@ -1,36 +1,35 @@
-import { useContext, useEffect, useState } from "react";
-import { responseStatus } from "../../../assets/enum/responseStatus";
-import CloseIcon from "../../../assets/icons/close";
-import Loader from "../../../assets/icons/loader";
-import { Context } from "../../../hooks/useContext";
+import { useContext, useState } from "react";
 import "../css/createSchedule.css";
+import { responseStatus } from "../../../assets/enum/responseStatus";
+import Loader from "../../../assets/icons/loader";
+import CloseIcon from "../../../assets/icons/close";
+import { Context } from "../../../hooks/useContext";
 import { checkInputData } from "../service/checkInput";
-import { createSchedule } from "../service/createSchedule";
+import { updateSchedule } from "../service/updateSchedule";
+import { deleteSchedule } from "../service/deleteSchedule";
 
 const today = new Date().toISOString().split("T")[0];
 
-const CreateSchedule = ({ close, scheduleList, setScheduleList }) => {
-  const { studentGroups, id } = useContext(Context);
-  const [scheduleType, setScheduleType] = useState([{ name: "Personal" }]);
-  const [type, setType] = useState(0);
+const UpdateSchedule = ({ schedule, close, scheduleList, setScheduleList }) => {
   const [status, setStatus] = useState();
 
+  const { id } = useContext(Context);
+
   const [formData, setFormData] = useState({
-    title: { value: "", error: "" },
-    desc: { value: "", error: "" },
-    date: { value: today, error: "" },
-    time: { value: "", error: "" },
+    title: { value: schedule.title, error: "" },
+    desc: { value: schedule.desc, error: "" },
+    date: { value: schedule.date.toString().split("T")[0], error: "" },
+    time: {
+      value: schedule.date.toString().split("T")[1]?.slice(0, 5) ?? "",
+      error: "",
+    },
   });
 
-  useEffect(() => {
-    const groupList = studentGroups.filter((group) => group.admin == id);
-    setScheduleType([...scheduleType, ...groupList]);
-  }, []);
+  const handleUpdateSchedule = () => {
+    const isOk = checkInputData(formData);
 
-  const handleCreateSchedule = () => {
-    const isOk = checkInputData(formData, setFormData);
     if (isOk) {
-      let data = {
+      const data = {
         title: formData.title.value,
         desc: formData.desc.value,
         date: new Date(
@@ -38,13 +37,20 @@ const CreateSchedule = ({ close, scheduleList, setScheduleList }) => {
         ).toISOString(),
       };
 
-      if (scheduleType[type].name != scheduleType[0].name) {
-        data = { ...data, groupId: scheduleType[type].id };
-      }
-      
-      createSchedule(setStatus, data, scheduleList, setScheduleList, close);
+      updateSchedule(
+        setStatus,
+        data,
+        schedule,
+        setScheduleList,
+        scheduleList,
+        close,
+      );
     }
   };
+
+  const handleDeleteSchedule = () => {
+    deleteSchedule(setStatus, schedule.id, scheduleList, setScheduleList, close)
+  }
 
   if (status == responseStatus.PENDING) {
     return (
@@ -79,6 +85,7 @@ const CreateSchedule = ({ close, scheduleList, setScheduleList }) => {
                   title: { ...formData.title, value: e.target.value },
                 })
               }
+              disabled={schedule.user_id != id}
             />
             <p className="error-message">{formData.title.error}</p>
           </div>
@@ -94,6 +101,7 @@ const CreateSchedule = ({ close, scheduleList, setScheduleList }) => {
                   desc: { ...formData.desc, value: e.target.value },
                 })
               }
+              disabled={schedule.user_id != id}
             />
             <p className="error-message">{formData.desc.error}</p>
           </div>
@@ -111,6 +119,7 @@ const CreateSchedule = ({ close, scheduleList, setScheduleList }) => {
                   date: { ...formData.date, value: e.target.value },
                 })
               }
+              disabled={schedule.user_id != id}
             />
           </div>
           <div className="popup-label-input">
@@ -126,35 +135,40 @@ const CreateSchedule = ({ close, scheduleList, setScheduleList }) => {
                   time: { ...formData.time, value: e.target.value },
                 })
               }
+              disabled={schedule.user_id != id}
             />
             <p className="error-message">{formData.time.error}</p>
           </div>
           <div className="popup-label-input">
             <p className="label">Schedule Type:</p>
-            <select
-              className="popup-select"
-              onChange={(e) => {
-                console.log(e.target.value)
-                setType(e.target.value);
-              }}
-            >
-              {scheduleType.map((schedule, ind) => (
-                <option value={ind} key={schedule.name}>
-                  {schedule.name}
-                </option>
-              ))}
-            </select>
+            <input
+              value={schedule.group_id ? schedule.group.name : "Personal"}
+              className="popup-input"
+              disabled
+            />
           </div>
-          <button
-            className="create-btn-schedule"
-            onClick={handleCreateSchedule}
-          >
-            Create Schedule
-          </button>
+          
+          {schedule.user_id == id && (
+            <div style={{width: '100%', display:'flex', gap: '32px'}}>
+            <button
+              className="create-btn-schedule"
+              onClick={handleDeleteSchedule}
+              style={{backgroundColor: 'red'}}
+            >
+              delete Schedule
+            </button>
+            <button
+              className="create-btn-schedule"
+              onClick={handleUpdateSchedule}
+            >
+              Update Schedule
+            </button>
+          </div>
+          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default CreateSchedule;
+export default UpdateSchedule;

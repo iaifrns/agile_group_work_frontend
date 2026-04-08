@@ -1,40 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./css/schdeuleList.css";
 import DashboardLayout from "../../layout/Dashboard";
 import { ActiveSideBarMenu } from "../../constants/activeSideBarMenu";
 import CreateSchedule from "./components/CreateSchedule";
+import { responseStatus } from "../../assets/enum/responseStatus";
+import LoaderPage from "../../components/LoaderPage";
+import { getSchedules } from "./service/getSchedules";
+import UpdateSchedule from "./components/UpdateSchedule";
 
-const mockEvents = [
-  {
-    title: "Team Meeting",
-    description: "Discuss project updates",
-    date: "2026-04-10",
-  },
-  {
-    title: "Team Meeting with boss",
-    description: "Discuss project updates",
-    date: "2026-04-10",
-  },
-  {
-    title: "Workout",
-    description: "Gym session",
-    date: "2026-04-10",
-  },
-  {
-    title: "Client Call",
-    description: "Zoom meeting with client",
-    date: "2026-04-15",
-  },
-];
-
-const EventCard = ({ event }) => (
-  <div className="event-card">
+const EventCard = ({ event, onclick }) => (
+  <div
+    className={`${event.group_id ? "event-card-group" : "event-card-personal"}`}
+    onClick={onclick}
+  >
     <div className="event-title">{event.title}</div>
-    <div className="event-desc">{event.description}</div>
+    <div className="event-desc">{event.desc}</div>
+    {event.group && <div className="event-desc">group: {event.group.name}</div>}
+    <div className="event-desc">
+      Time: {event.date.toString().split("T")[1]?.slice(0, 5) ?? ""}
+    </div>
   </div>
 );
 
-const DayCell = ({ day, isCurrentMonth, isToday, events }) => {
+const DayCell = ({ day, isCurrentMonth, isToday, events, setSchedule }) => {
   return (
     <div
       className={`day-cell ${!isCurrentMonth ? "faded" : ""} ${
@@ -44,7 +32,7 @@ const DayCell = ({ day, isCurrentMonth, isToday, events }) => {
       <div className="day-number">{day.getDate()}</div>
       <div className="events">
         {events.map((event, i) => (
-          <EventCard key={i} event={event} />
+          <EventCard key={i} event={event} onclick={() => setSchedule(event)} />
         ))}
       </div>
     </div>
@@ -54,6 +42,14 @@ const DayCell = ({ day, isCurrentMonth, isToday, events }) => {
 const SchedulesPage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [showCreatePopup, setShowCreatePopup] = useState(false);
+  const [showUpdatePopup, setShowUpdatePopup] = useState(false);
+  const [scheduleList, setScheduleList] = useState([]);
+  const [status, setStatus] = useState(responseStatus.PENDING);
+  const [schedule, setSchedule] = useState();
+
+  useEffect(() => {
+    getSchedules(setStatus, setScheduleList);
+  }, []);
 
   const startOfMonth = new Date(
     currentDate.getFullYear(),
@@ -99,10 +95,30 @@ const SchedulesPage = () => {
 
   const today = new Date();
 
+  if (status == responseStatus.PENDING) {
+    return (
+      <DashboardLayout active={ActiveSideBarMenu.Commitment}>
+        <LoaderPage />
+      </DashboardLayout>
+    );
+  }
+
   return (
     <DashboardLayout active={ActiveSideBarMenu.Commitment}>
+      {showUpdatePopup && (
+        <UpdateSchedule
+          close={() => setShowUpdatePopup(false)}
+          schedule={schedule}
+          scheduleList={scheduleList}
+          setScheduleList={setScheduleList}
+        />
+      )}
       {showCreatePopup && (
-        <CreateSchedule close={() => setShowCreatePopup(false)} />
+        <CreateSchedule
+          close={() => setShowCreatePopup(false)}
+          scheduleList={scheduleList}
+          setScheduleList={setScheduleList}
+        />
       )}
       <div className="schedule-container">
         <div className="schedule-header">
@@ -141,7 +157,9 @@ const SchedulesPage = () => {
 
             {days.map((d, i) => {
               const dateStr = d.date.toISOString().split("T")[0];
-              const dayEvents = mockEvents.filter((e) => e.date === dateStr);
+              const dayEvents = scheduleList.filter(
+                (e) => e.date.toString().split("T")[0] === dateStr,
+              );
 
               return (
                 <DayCell
@@ -150,6 +168,10 @@ const SchedulesPage = () => {
                   isCurrentMonth={d.current}
                   isToday={d.date.toDateString() === today.toDateString()}
                   events={dayEvents}
+                  setSchedule={(sch) => {
+                    setShowUpdatePopup(true);
+                    setSchedule(sch);
+                  }}
                 />
               );
             })}

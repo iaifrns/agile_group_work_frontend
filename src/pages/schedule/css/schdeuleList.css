@@ -1,46 +1,46 @@
-.schedule-container{
+.schedule-container {
   padding: 40px 60px;
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.schedule-header{
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    align-items: center;
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
 
-.schedule-page-info{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+.schedule-page-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.schedule-page-info .title{
-    color: white;
-    font-size: 32px;
-    font-weight: 700;
+.schedule-page-info .title {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
 }
 
-.schedule-page-info .desc{
-    color: white;
-    font-size: 12px;
+.schedule-page-info .desc {
+  color: white;
+  font-size: 12px;
 }
 
-.add-schedule-btn{
-    background-color: #5051f9;
-    border: 0px;
-    padding: 12px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
+.add-schedule-btn {
+  background-color: #5051f9;
+  border: 0px;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.add-schedule-btn:hover{
-    background-color: #272767;
+.add-schedule-btn:hover {
+  background-color: #272767;
 }
 
 .calendar-container {
@@ -116,13 +116,22 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  max-height: 190px;
+  overflow-y: scroll;
 }
 
-.event-card {
-  background: rgba(80, 81, 249, 0.2);
-  border-left: 3px solid #5051f9;
+.event-card-personal {
   padding: 4px 6px;
   border-radius: 6px;
+  background: rgba(80, 81, 249, 0.2);
+  border-left: 3px solid #5051f9;
+}
+
+.event-card-group {
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: rgba(80, 249, 122, 0.2);
+  border-left: 3px solid #50f961;
 }
 
 .event-title {
