@@ -205,7 +205,7 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks, type }) => {
         </div>
         <div className="task-create-form">
           <div className="task-input-label">
-            <p className="task-create-label">Priority:</p>
+            <p className="task-create-label">Category:</p>
             <select
               className="task-create-select"
               value={formData.priority.value}

@@ -14,6 +14,7 @@ import { io } from "socket.io-client";
 import GroupTasksPage from "./pages/tasks/GroupTaskPage";
 import MyTaskPage from "./pages/tasks/MyTaskPage";
 import SchedulesPage from "./pages/schedule/schedulesPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
 export const socket = io("http://localhost:5001/", { withCredentials: true });
 
@@ -96,6 +97,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <SchedulesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
               </ProtectedRoute>
             }
           />

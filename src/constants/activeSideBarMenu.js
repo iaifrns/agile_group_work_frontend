@@ -8,7 +8,7 @@ import TaskIcon from "../assets/icons/Task";
 import TasksIcon from "../assets/icons/tasks";
 
 export const ActiveSideBarMenu = {
-  Dashboard: { id: 1, name: "Dashboard", Icon: DashboardIcon, path: "#" },
+  Dashboard: { id: 1, name: "Dashboard", Icon: DashboardIcon, path: "/dashboard" },
   MyCommitment: {
     id: 8,
     name: "My Commitments",
