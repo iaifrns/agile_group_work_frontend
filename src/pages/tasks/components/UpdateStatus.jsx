@@ -14,7 +14,7 @@ const UpdateStatus = ({ close, task, setTask }) => {
         const newTask = {...task, status: status}
         updateTask(setStatus,newTask,setTask,close)
     }
-
+  {/* Show loading when updating task status, and show error message when update failed */}
   if (status == responseStatus.PENDING) {
     return (
       <div className="popup-container-task">

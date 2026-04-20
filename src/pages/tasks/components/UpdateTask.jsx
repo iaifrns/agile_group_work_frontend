@@ -7,7 +7,7 @@ import "../css/createTask.css";
 import { updateTask } from "../services/updateTask";
 
 const today = new Date().toISOString().split("T")[0];
-
+  {/* Component for updating task information, only show when user click the "Edit" button in TaskInfoContainer */}
 const UpdateTaskInfo = ({ close, task, setTask }) => {
   const [formData, setFormData] = useState({
     title: {
@@ -31,7 +31,7 @@ const UpdateTaskInfo = ({ close, task, setTask }) => {
   const [err, setErr] = useState("");
 
   const [status, setStatus] = useState();
-
+  {/* Handle update task information form submission, validate the form data and submit the updated task information to backend, and update the task information in TaskInfoContainer when update successfully */}
   const handleUpdateTask = () => {
     if (formData.desc.value.length > 0 && formData.title.value.length > 0) {
       updateTask(
@@ -67,7 +67,7 @@ const UpdateTaskInfo = ({ close, task, setTask }) => {
       });
     }
   };
-
+  {/* Show loading when updating task information, and show error message when update failed */}
   if (status == responseStatus.PENDING) {
     return (
       <div className="popup-container-task">
@@ -85,7 +85,7 @@ const UpdateTaskInfo = ({ close, task, setTask }) => {
       </div>
     );
   }
-
+  {/* The form for updating task information, including title, description, priority and due date, and a button to submit the updated task information */}
   return (
     <div className="popup-container-task">
       <div className="popup-task-create">

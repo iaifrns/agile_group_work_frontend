@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the Dropdown component, which is used to render the dropdown icon in the sidebar, it will display the dropdown icon with the specified color, if no color is specified, it will use the default color */}
 const Dropdown = () => {
   return (
     <svg

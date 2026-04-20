@@ -25,11 +25,11 @@ const GroupRequestPage = () => {
 
   const { activeGroup } = useContext(Context);
   const navigatorTo = useNavigate();
-
+  {/* Fetch group request list when component is mounted, and set the group request list */}
   useEffect(() => {
     getAllGroupRequest(setStatus, setRequestList, activeGroup.id);
   }, []);
-
+  {/* Handle show confirmation popup when user click the "Approve" button or "Decline" button in each group request item, and set the confirmation message and the request information for the confirmation popup */}
   const handleShowConfirmationPopup = (request, response) => {
     setReq({ ...request, action: response });
     if (response == joinRequestResponse.APPROVE) {
@@ -39,7 +39,7 @@ const GroupRequestPage = () => {
     }
     setShowConfirmPopup(true);
   };
-
+  {/* Handle submit the response of the group join request to backend, and update the group request list when response successfully */}
   const handleResponse = () => {
     responseRequest(
       setRequestLoader,
@@ -51,7 +51,7 @@ const GroupRequestPage = () => {
       () => setShowConfirmPopup(false),
     );
   };
-
+  {/* Show loading when fetching group request list, and show error message when fetch failed */}
   if (status == responseStatus.PENDING) {
     return (
       <DashboardLayout active={ActiveSideBarMenu.GroupDetail}>

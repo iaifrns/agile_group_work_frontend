@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the RequestListIcon component, which is used to render the request list icon in the sidebar, it will display the request list icon with the specified color, if no color is specified, it will use the default color */}
 const RequestListIcon = ({c}) => {
     let color = c ? c : "#5F6388";
   return (

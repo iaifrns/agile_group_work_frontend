@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the AddIcon component, which is used to render the add icon in the task detail page, it will display the add icon with the specified color, if no color is specified, it will use the default color */}
 const AddIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

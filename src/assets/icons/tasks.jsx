@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the TasksIcon component, which is used to render the tasks icon in the sidebar, it will display the tasks icon with the specified color, if no color is specified, it will use the default color */}
 const TasksIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

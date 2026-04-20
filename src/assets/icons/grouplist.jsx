@@ -1,4 +1,4 @@
-
+  {/* This file contains the GrouplistIcon component, which is used to render the grouplist icon in the sidebar, it will display the grouplist icon with the specified color, if no color is specified, it will use the default color */}
 const GrouplistIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

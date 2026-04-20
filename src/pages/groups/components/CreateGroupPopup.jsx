@@ -35,7 +35,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
     let newArr = members.filter((_, i) => i != ind);
     setMembers(newArr);
   };
-
+  {/* Filter group list when search text is updated or when group list is updated */}
   useEffect(() => {
     setFilterList(
       students.filter(
@@ -45,7 +45,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
       ),
     );
   }, [searchText, students]);
-
+  {/* Handle create group by calling the createGroup service, and navigate to group detail page when create successfully */}
   const handleCreateGroup = () => {
     if (groupName.value.length < 1) {
       setGroupName({
@@ -60,7 +60,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
       }
     }
   };
-
+  {/* Show loading when creating group, and show error message when create failed */}
   if (status == responseStatus.PENDING) {
     return (
       <div
@@ -74,7 +74,7 @@ const CreateGroupPopup = ({ show, close, members, setMembers, students }) => {
       </div>
     );
   }
-
+  {/* Render the create group popup, show input for group name and group members selection, and show the error message when the group name is empty when user click the "Create Group" button */}
   return (
     <div
       className="popup-container"

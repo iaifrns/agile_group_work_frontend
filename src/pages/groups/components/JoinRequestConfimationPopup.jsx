@@ -7,7 +7,7 @@ import { responseStatus } from "../../../assets/enum/responseStatus";
 import Loader from "../../../assets/icons/loader";
 import { sendJoinRequest } from "../services/sendJoinRequest";
 import { useNavigate } from "react-router-dom";
-
+  {/* Component for confirming join group request, only show when user click the "Join" button in GroupItem component, it will show a popup to confirm whether user want to send join request to the group, if user click the "Confirm" button, it will trigger the sendJoinRequest service to send join request to the backend */}
 const JoinRequestConfimationPopup = ({ name, show, closePopUp, groupId }) => {
   const [status, setStatus] = useState();
 

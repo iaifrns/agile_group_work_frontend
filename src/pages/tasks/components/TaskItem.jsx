@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TaskPriority, TaskSTatus } from "../../../constants/taskStatus";
-
+  {/* Component for showing task information in the task list, including icon, title and description */}
 const TaskItem = ({
   importance,
   title,
@@ -18,7 +18,7 @@ const TaskItem = ({
   });
 
   const navigateTo = useNavigate();
-
+  {/* Set the style of the task card based on the task status and priority */}
   useEffect(() => {
     let newStyle = {
       container: "",

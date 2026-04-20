@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the NotificationIcon component, which is used to render the notification icon in the sidebar, it will display the notification icon with the specified color, if no color is specified, it will use the default color */}
 const NotificationIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

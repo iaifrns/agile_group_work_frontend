@@ -12,7 +12,7 @@ import ConfirmationPopup from "../../components/ConfirmationPopup";
 import { deleteGroup } from "./services/deleteGroup";
 import { removeMemeberFromGroup } from "./services/removeMemberFromGroup";
 import StudentAddMemberList from "./components/StudentAddMemberList";
-
+  {/* Group detail page, show group information and group members list, only group admin can see the "Add Member" button and "Remove" button for each member, and only group admin can see the "Delete Group" button in the "Danger Zone" section */}
 const GroupDetailPage = () => {
   const [status, setStatus] = useState(responseStatus.PENDING);
   const [groupDetail, setGroupDetail] = useState();
@@ -26,7 +26,7 @@ const GroupDetailPage = () => {
 
   const { activeGroup, id, setActiveGroup, studentGroups, setStudentGroups } =
     useContext(Context);
-
+  {/* Fetch group detail information when component is mounted, and set the group members list and task members list */}
   useEffect(() => {
     getGroupDetailInfo(activeGroup.id, setStatus, setGroupDetail);
   }, [activeGroup]);
@@ -38,7 +38,7 @@ const GroupDetailPage = () => {
       </DashboardLayout>
     );
   }
-
+  {/* Handle get admin name by filtering out the admin id from the group members list */}
   const handleAdminName = () => {
     return (
       groupDetail.members.filter((item) => item.id == groupDetail.admin)[0]
@@ -48,12 +48,12 @@ const GroupDetailPage = () => {
         .lastName
     );
   };
-
+  {/* Handle get admin name by filtering out the admin id from the group members list */}
   const handleSelectMember = (id, name) => {
     setShowRemoveMemberPopup(true);
     setSelectedMember({ id, name });
   };
-
+  {/* Handle delete group by calling the deleteGroup service, and navigate to group list page when delete successfully */}
   const handleDeleteGroup = () => {
     deleteGroup(
       setDeleteLoader,
@@ -64,7 +64,7 @@ const GroupDetailPage = () => {
       navigatorTo,
     );
   };
-
+  {/* Handle remove member from group by calling the removeMemeberFromGroup service, and update the group members list in group detail page when remove successfully */}
   const handleRemoveMember = () => {
     removeMemeberFromGroup(
       activeGroup.id,
@@ -153,7 +153,7 @@ const GroupDetailPage = () => {
             </div>
           </div>
 
-          {/* <!-- List of Group Members --> */}
+          {/*  List of Group Members  */}
           <div className="card members-section">
             <div className="members-header">
               <h2 className="card-title">Group Members</h2>
@@ -213,7 +213,7 @@ const GroupDetailPage = () => {
             </div>
           </div>
 
-          {/* <!-- Danger Zone --> */}
+          {/*  Danger Zone */}
           {id == groupDetail.admin && (
             <div className="danger-zone">
               <h2 className="danger-title">Danger Zone</h2>

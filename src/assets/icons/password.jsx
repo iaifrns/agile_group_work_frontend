@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the PasswordIcon component, which is used to render the password icon in the sidebar, it will display the password icon with the specified color, if no color is specified, it will use the default color */}
 const PasswordIcon = ({ color }) => {
   return (
     <svg

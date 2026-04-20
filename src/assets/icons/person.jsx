@@ -1,4 +1,4 @@
-
+  {/* This file contains the Phone component, which is used to render the phone icon in the contact page, it will display the phone icon with the specified color, if no color is specified, it will use the default color */}
 const Person = ({ color }) => {
   return (
     <svg

@@ -1,4 +1,4 @@
-
+  {/* This file contains the EmptyListIcon component, which is used to render the empty list icon in the empty list page, it will display the empty list icon with the specified color, if no color is specified, it will use the default color */}
 const EmptyListIcon = () => {
   return (
     <svg

@@ -1,4 +1,4 @@
-
+  {/* This file contains the Loader component, which is used to render the loading spinner in the application, it will display the loading spinner with the specified color, if no color is specified, it will use the default color */}
 const Loader = ({color, w='24', h='24'}) => {
   return (
     <svg

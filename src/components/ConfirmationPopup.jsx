@@ -2,6 +2,7 @@ import { responseStatus } from "../assets/enum/responseStatus";
 import CloseIcon from "../assets/icons/close";
 import Loader from "../assets/icons/loader";
 import "../css/confirmationPopup.css";
+  {/* ConfirmationPopup component is used to render the confirmation popup when the user perform some actions that require confirmation, it will display the confirmation message and two buttons, one for cancel and one for confirm, it will also display the loading icon when the status is pending */}
 const ConfirmationPopup = ({ message, close, confirm, loader }) => {
   if (loader == responseStatus.PENDING) {
     return (

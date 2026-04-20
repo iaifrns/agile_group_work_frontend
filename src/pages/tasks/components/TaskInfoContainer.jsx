@@ -1,4 +1,4 @@
-
+  {/* Component for showing task information in the task list, including icon, title and description */}
 const TaskInfoContainer = ({icon, title, desc}) => {
     return (
         <div className="stat-card">

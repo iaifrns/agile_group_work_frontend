@@ -36,11 +36,11 @@ const RequestListPage = () => {
       setShowConfirmPopup,
     );
   };
-
+  {/* Fetch group request list when component is mounted, and set the group request list */}
   useEffect(() => {
     getStudentRequest(setStatus, setRequestList);
   }, []);
-
+  {/* Filter group request list when search text is updated or when group request list is updated */}
   useEffect(() => {
     setFilteredRequestList(
       requestList.filter((item) =>
@@ -48,7 +48,7 @@ const RequestListPage = () => {
       ),
     );
   }, [requestList, searchText]);
-
+  {/* Show loading when fetching group request list, and show error message when fetch failed */}
   if (status == responseStatus.PENDING) {
     return (
       <DashboardLayout active={ActiveSideBarMenu.RequestList}>
@@ -56,7 +56,7 @@ const RequestListPage = () => {
       </DashboardLayout>
     );
   }
-
+  {/* Render the group request list page, show search input on the top, and show the filtered group request list in the middle, if the filtered group request list is empty, show the empty icon */}
   return (
     <DashboardLayout active={ActiveSideBarMenu.RequestList}>
       {showConfirmPopup && (

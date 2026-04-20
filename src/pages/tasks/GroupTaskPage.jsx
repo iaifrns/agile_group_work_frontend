@@ -34,6 +34,7 @@ const GroupTasksPage = () => {
     ]);
   }, [activeGroup]);
 
+  {/* Filter task list when switch between group task and my task or when task list is updated */}
   useEffect(() => {
     if (isGroupFilter) {
       setFilteredList(taskList);
@@ -46,6 +47,7 @@ const GroupTasksPage = () => {
     }
   }, [isGroupFilter, taskList]);
 
+    {/* Filter task list when switch between different task category */}
   const handleFilterTask = () => {
     if (activeMenu == 0) {
       return filteredList;

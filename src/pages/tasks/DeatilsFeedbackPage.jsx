@@ -35,11 +35,12 @@ const TaskDetailPage = () => {
   const [feedbackLoader, setFeedbackLoader] = useState();
   const [showAssignPopup, setShowAssignPopup] = useState(false);
   const [showUpdateTaskPopup, setShowUpdateTaskPopup] = useState(false)
-
+  {/* Fetch task detail when component is mounted or taskId is changed */}
   useEffect(() => {
     getTaskDetail(setStatus, setTask, taskId);
   }, [taskId]);
-
+  
+  {/* Filter task list when switch between different task category */}
   const handleProgress = (progress) => {
     if (progress == TaskSTatus.TODO) {
       return "15%";
@@ -49,15 +50,15 @@ const TaskDetailPage = () => {
       return "100%";
     }
   };
-
+  {/* Handle delete task */}
   const handleDelete = () => {
     deleteTask(setStatus, taskId, navigateTo);
   };
-
+  {/* Set feedback after create new feedback */}
   const setFeedback = (feedback) => {
     setTask({ ...task, feedBack: [feedback, ...task.feedBack] });
   };
-
+  {/* Handle create new feedback */}
   const handleCreateFeedBack = () => {
     createFeedback(taskId, comment, setFeedbackLoader, setComment, setFeedback);
   };
@@ -247,7 +248,7 @@ const TaskDetailPage = () => {
             </div>
 
             <div className="card team-card">
-              <p className="team-title">ASSIGNED TEAM</p>
+              <p className="team-title">ASSIGNED MEMBER</p>
               {task.students.map((student) => (
                 <div className="member">
                   <div className="avatar-circle purple">

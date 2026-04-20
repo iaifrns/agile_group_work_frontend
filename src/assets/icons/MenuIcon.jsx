@@ -1,3 +1,4 @@
+  {/* This file contains the MenuIcon component, which is used to render the menu icon in the sidebar, it will display the menu icon with the specified color, if no color is specified, it will use the default color */}
 const MenuIcon = ({ c }) => {
   const color = c ? c : "#5F6388";
   return (

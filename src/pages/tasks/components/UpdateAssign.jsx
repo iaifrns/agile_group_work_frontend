@@ -7,24 +7,24 @@ import { getGroupDetailInfo } from "../../groups/services/getGroupDetailInfo";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import Loader from "../../../assets/icons/loader";
 import { updateTaskMembers } from "../services/updateTaskMembers";
-
+  {/* Component for updating task assign, only show when user click the "Manage Assign" button in TaskInfoContainer */}
 const UpdateAssign = ({ members, groupId, close, taskId, task, setTask }) => {
   const [status, setStatus] = useState(responseStatus.PENDING);
   const [groupDetail, setGroupDetail] = useState();
   const [groupMembers, setGroupMembers] = useState([]);
   const [taskMembers, setTaskMembers] = useState(members);
-
+  {/* Fetch group detail information when component is mounted, and set the group members list and task members list */}
   useEffect(() => {
     getGroupDetailInfo(groupId, setStatus, setGroupDetail);
   }, []);
-
+  {/* Set the group members list by filtering out the task members from the group members when group detail information is fetched */}
   useEffect(() => {
     if (status != responseStatus.PENDING) {
       const ids = members.map((m) => m.id);
       setGroupMembers(groupDetail.members.filter((i) => !ids.includes(i.id)));
     }
   }, [groupDetail]);
-
+  {/* Handle remove member from task by adding the member back to group members list and removing from task members list */}
   const handleRemoveMember = (id) => {
     setGroupMembers([
       ...groupMembers,
@@ -32,20 +32,20 @@ const UpdateAssign = ({ members, groupId, close, taskId, task, setTask }) => {
     ]);
     setTaskMembers(taskMembers.filter((i) => i.id != id));
   };
-
+  {/* Handle add member to task by adding the member to task members list and removing from group members list */}
   const handleAddMember = (id) => {
     setTaskMembers([...taskMembers, ...groupMembers.filter((i) => i.id == id)]);
     setGroupMembers(groupMembers.filter((i) => i.id != id));
   };
-
+  {/* Handle submit the updated task members list to backend, and update the task members list in TaskInfoContainer when update successfully */}
   const setMember = (member)=>{
     setTask({...task, students: member.students})
   }
-
+  {/* Handle submit the updated task members list to backend, and update the task members list in TaskInfoContainer when update successfully */}
   const handleSubmit = () => {
     updateTaskMembers(setStatus, taskMembers, taskId, setMember, close,members)
   }
-
+  {/* Show loading when fetching group detail information, and show error message when fetch failed */}
   if (status == responseStatus.PENDING) {
     return (
       <div className="popup-container-task">

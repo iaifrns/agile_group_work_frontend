@@ -1,4 +1,4 @@
-
+  {/* This file contains the SearchIcon component, which is used to render the search icon in the input field, it will display the search icon with the specified color, if no color is specified, it will use the default color */}
 const SearchIcon = ({ c }) => {
   let color = c ? c : "#838383";
   return (

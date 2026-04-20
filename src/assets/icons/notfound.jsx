@@ -1,3 +1,4 @@
+  {/* This file contains the NotfoundIcon component, which is used to render the not found icon in the not found page, it will display the not found icon with the specified color, if no color is specified, it will use the default color */}
 const NotfoundIcon = () => {
   return (
     <svg

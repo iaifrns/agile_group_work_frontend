@@ -1,4 +1,4 @@
-
+  {/* This file contains the BackButtonLogo component, which is used to render the back button icon in the task detail page, it will display the back button icon with the specified color, if no color is specified, it will use the default color */}
 const BackButtonLogo = ({ c }) => {
   let color = c ? c : "gray";
   return (

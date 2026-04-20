@@ -9,7 +9,7 @@ import CustomInput, { CustomInputPassword } from "./components/input";
 import "./css/login.css";
 import { loginInputCheck } from "./services/inputCheck";
 import { loginUser } from "./services/login";
-
+  {/* Login page component, it is used to render the login page, and handle the login logic, when user click the "Login" button, it will trigger the loginUser service to send login request to the backend, if login successfully, it will navigate to the dashboard page, if login failed, it will show the error message on the page */}
 const Login = () => {
   const navigateTo = useNavigate();
   const [status, setStatus] = useState();
@@ -43,7 +43,7 @@ const Login = () => {
       );
     }
   };
-
+  {/* Show loading when sending login request, and show error message when login failed */}
   return (
     <div className="container">
       <div className="left-side">

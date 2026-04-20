@@ -1,3 +1,4 @@
+  {/* This file contains the GroupDetailIcon component, which is used to render the group detail icon in the sidebar, it will display the group detail icon with the specified color, if no color is specified, it will use the default color */}
 const GroupDetailIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

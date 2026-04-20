@@ -1,7 +1,7 @@
 import React from 'react';
 import Loader from '../assets/icons/loader';
 import '../css/loader.css'
-
+  {/* LoaderPage component is used to render the loading page when the application is fetching data from the backend, it will display a loading icon and a loading text */}
 const LoaderPage = () => {
     return (
         <div className='loader_page'>

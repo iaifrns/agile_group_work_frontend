@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the Mail component, which is used to render the mail icon in the contact page, it will display the mail icon with the specified color, if no color is specified, it will use the default color */}
 const Mail = ({color}) => {
   return (
     <svg

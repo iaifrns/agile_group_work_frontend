@@ -11,7 +11,7 @@ import { responseStatus } from "../../assets/enum/responseStatus";
 import Loader from "../../assets/icons/loader";
 import { getUnReadNotifications } from "../../services/getUnReadNotif";
 import { setNotificationsToSeen } from "../../services/setNotificationsToSeen";
-
+  {/* Topbar component is used to render the topbar on the top of the page, it will display the user name and the active group name, and also display the notification icon and the dropdown icon, when user click the notification icon, it will show the notification list, when user click the dropdown icon, it will show the group list, when user click the group in the group list, it will set the active group in the context */}
 const Topbar = () => {
   const {
     name,
@@ -26,7 +26,7 @@ const Topbar = () => {
     useState(false);
 
   const [status, setStatus] = useState();
-
+  {/* Fetch notification list when component is mounted, and set the notification list in the context */}
   useEffect(() => {
     socket.on("notification", (data) => {
       console.log(data);

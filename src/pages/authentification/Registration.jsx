@@ -11,7 +11,7 @@ import { useContext, useState } from "react";
 import { registerInputCheck } from "./services/inputCheck";
 import { registerUser } from "./services/register";
 import { Context } from "../../hooks/useContext";
-
+  {/* Registration page component, it is used to render the registration page, and handle the registration logic, when user click the "Create Account" button, it will trigger the registerUser service to send register request to the backend, if register successfully, it will navigate to the login page, if register failed, it will show the error message on the page */}
 const Registration = () => {
   const navigateTo = useNavigate();
 
@@ -45,7 +45,7 @@ const Registration = () => {
   const [error, setError] = useState();
 
   const {handleId} = useContext(Context)
-
+  {/* Handle registration by calling the registerUser service, and navigate to the login page when register successfully, if register failed, it will show the error message on the page */}
   const handleSubmit = async () => {
     const isInputOk = registerInputCheck(registerData, setRegisterData);
 

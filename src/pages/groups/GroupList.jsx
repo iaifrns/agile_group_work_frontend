@@ -27,7 +27,7 @@ const GroupList = () => {
   const [status, setStatus] = useState(responseStatus.PENDING);
   const [groupList, setGroupList] = useState([]);
   const [students, setStudents] = useState([]);
-
+  {/* Filter group list when search text is updated or when group list is updated */}
   useEffect(() => {
     setFilterGroupList(
       groupList.filter((item) =>
@@ -35,22 +35,22 @@ const GroupList = () => {
       ),
     );
   }, [searchText, status]);
-
+  {/* Handle show join request confirmation popup when user click the "Join" button in GroupItem component, and set the group id and group name for the join request confirmation popup */}
   const handleJoinPopupDisplay = (group) => {
     setShowJoinPopup(true);
     setGroupId(group.id);
     setGroupName(group.name);
   };
-
+  {/* Handle close join request confirmation popup and reset the group id and group name when user click the "Cancel" button in JoinRequestConfimationPopup component */}
   const handleCloseJoinPopupDisplay = () => {
     setShowJoinPopup(false);
     setGroupName("");
   };
-
+  {/* Fetch group list and students list when component is mounted, and set the group list and students list */}
   useEffect(() => {
     getAllGroups(setStatus, setGroupList, setStudents);
   }, []);
-
+  {/* Show loading when fetching group list, and show error message when fetch failed */}
   if (status == responseStatus.PENDING) {
     return (
       <DashboardLayout active={ActiveSideBarMenu.GroupList}>
@@ -58,7 +58,7 @@ const GroupList = () => {
       </DashboardLayout>
     );
   }
-
+  {/* Render the group list page, show search input and create group button on the top, and show the filtered group list in the middle, if the filtered group list is empty, show the empty icon */}
   return (
     <DashboardLayout active={ActiveSideBarMenu.GroupList}>
       <CreateGroupPopup

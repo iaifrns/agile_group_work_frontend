@@ -15,11 +15,11 @@ const StudentAddMemberList = ({ groupId, close, setGroupDetail, groupDetail }) =
   const [showHighlight, setShowHighLight] = useState("");
   const [confirmMember, setConfirmMember] = useState(false);
   const [student, setStudent] = useState()
-
+  {/* Fetch student list who are not in the group when component is mounted, and set the student list */}
   useEffect(() => {
     getStudentNotInGroup(setLoader, setStudentList, groupId);
   }, []);
-
+  {/* Filter student list when search text is updated or when student list is updated */}
   useEffect(() => {
     setFilteredStudentList(
       studentList.filter(
@@ -31,11 +31,11 @@ const StudentAddMemberList = ({ groupId, close, setGroupDetail, groupDetail }) =
       ),
     );
   }, [studentList, searchText]);
-
+  {/* Handle confirm add member by calling the addMember service, and update the group detail information in GroupInfoContainer when add member successfully */}
   const handleConfirmAddMember = () => {
     addMember(setLoader, student, groupId, close, groupDetail, setGroupDetail)
   }
-
+  {/* Show loading when fetching student list, and show error message when fetch failed */}
   if (loader == responseStatus.PENDING) {
     return (
       <div className="popup-container">
@@ -45,7 +45,7 @@ const StudentAddMemberList = ({ groupId, close, setGroupDetail, groupDetail }) =
       </div>
     );
   }
-
+  {/* Render the student list popup, show search input on the top, and show the filtered student list in the middle, if the filtered student list is empty, show the empty icon, when user click a student item, show the confirm add member popup to confirm whether user want to add the student as group member */}
   if (confirmMember) {
     return (
       <div className="popup-container">
@@ -66,7 +66,7 @@ const StudentAddMemberList = ({ groupId, close, setGroupDetail, groupDetail }) =
       </div>
     );
   }
-
+  {/*   Render the student list popup, show search input on the top, and show the filtered student list in the middle, if the filtered student list is empty, show the empty icon, when user click a student item, show the confirm add member popup to confirm whether user want to add the student as group member */}
   return (
     <div className="popup-container">
       <div className="students-popup">

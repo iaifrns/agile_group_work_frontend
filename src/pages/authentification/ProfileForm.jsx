@@ -6,7 +6,7 @@ import { logout } from "./services/logout";
 import Loader from "../../assets/icons/loader";
 import { responseStatus } from "../../assets/enum/responseStatus";
 import { updateStudent } from "./services/updateStudent";
-
+  {/* ProfileForm component is used to render the profile page, and handle the update student information and logout logic, when user click the "update info" button, it will trigger the updateStudent service to send update request to the backend, if update successfully, it will update the student information in the context, if update failed, it will show the error message on the page, when user click the "Logout" button, it will trigger the logout service to send logout request to the backend, if logout successfully, it will clear the student information in the context and navigate to the login page, if logout failed, it will show the error message on the page */}
 const ProfileForm = ({ student, setStudent, setLoading }) => {
   const navigateTo = useNavigate();
   const {
@@ -21,7 +21,7 @@ const ProfileForm = ({ student, setStudent, setLoading }) => {
   const [status, setStatus] = useState();
   const [studentCopy, setStudentCopy] = useState(student);
   const [activateUpdateButton, setActivateUpdateButton] = useState(false);
-
+  {/* Handle logout by calling the logout service, and clear the student information in the context and navigate to the login page when logout successfully */}
   const handleLogout = async () => {
     if (status != responseStatus.PENDING) {
       await logout(setStatus, navigateTo, handleId);
@@ -30,7 +30,7 @@ const ProfileForm = ({ student, setStudent, setLoading }) => {
       setRun(false);
     }
   };
-
+  {/* Handle update student information by calling the updateStudent service, and update the student information in the context when update successfully */}
   const handleUpdate = async () => {
     const data = {
       firstName: studentCopy.firstName,
@@ -42,7 +42,7 @@ const ProfileForm = ({ student, setStudent, setLoading }) => {
       await updateStudent(data, setLoading, id, setStudent);
     }
   };
-
+  {/* Use useEffect to compare the student information in the form with the original student information, if there is any change, activate the update button, otherwise, deactivate the update button */}
   useEffect(() => {
     switch (true) {
       case student.firstName != studentCopy.firstName:
@@ -64,7 +64,7 @@ const ProfileForm = ({ student, setStudent, setLoading }) => {
         setActivateUpdateButton(false);
     }
   }, [studentCopy]);
-
+  {/* Handle update student information by calling the updateStudent service, and update the student information in the context when update successfully */}
   return (
     <section className="profile">
       <div className="profile-inner">

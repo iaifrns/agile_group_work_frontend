@@ -1,3 +1,4 @@
+  {/* This file contains the ProfileIcon component, which is used to render the profile icon in the sidebar, it will display the profile icon with the specified color, if no color is specified, it will use the default color */}
 const ProfileIcon = ({c}) => {
   let color = c ? c : "#5F6388";
   return (

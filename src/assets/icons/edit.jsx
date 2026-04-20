@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the EditIcon component, which is used to render the edit icon in the task detail page, it will display the edit icon with the specified color, if no color is specified, it will use the default color */}
 const EditIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

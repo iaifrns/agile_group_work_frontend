@@ -8,7 +8,7 @@ import "../css/createTask.css";
 import { createTask } from "../services/createTask";
 
 const today = new Date().toISOString().split("T")[0];
-
+  {/* Component for creating new task, only show when user click the "Create Task" button in GroupTasksPage */}
 const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
   const [studentList, setStudentList] = useState([]);
   const [memberList, setMemberList] = useState(groupMembers);
@@ -39,17 +39,17 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
   const [err, setErr] = useState("");
 
   const [status, setStatus] = useState();
-
+  {/* Handle assign student when click the student in the member list */}
   const handleAssignStudent = (student, ind) => {
     setStudentList([...studentList, student]);
     setMemberList(memberList.filter((_, i) => i != ind));
   };
-
+  {/* Handle remove assigned student when click the student in the assigned list */}
   const handleRemoveAssign = (ind, student) => {
     setStudentList(studentList.filter((_, i) => i != ind));
     setMemberList([...memberList, student]);
   };
-
+  {/* Handle create task when click the "Create Task" button in the popup, validate the form data and call the createTask service to create new task */}
   const handleCreateTask = () => {
     if (
       formData.desc.value.length > 0 &&
@@ -98,7 +98,7 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
       });
     }
   };
-
+  {/* Show loading when creating task, and show error message when create task failed */}
   if (status == responseStatus.PENDING) {
     return (
       <div className="popup-container-task">
@@ -116,7 +116,7 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
       </div>
     );
   }
-
+  {/* The form for creating new task, including title, description, status, priority, due date and assign student */}
   return (
     <div className="popup-container-task">
       <div className="popup-task-create">

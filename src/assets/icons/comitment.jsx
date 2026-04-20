@@ -1,3 +1,4 @@
+  {/* This file contains the ComitmentIcon component, which is used to render the comitment icon in the sidebar, it will display the comitment icon with the specified color, if no color is specified, it will use the default color */}
 const ComitmentIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

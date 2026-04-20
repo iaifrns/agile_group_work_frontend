@@ -1,5 +1,5 @@
 import React from "react";
-
+  {/* This file contains the DeleteIcon component, which is used to render the delete icon in the task detail page, it will display the delete icon with the specified color, if no color is specified, it will use the default color */}
 const DeleteIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

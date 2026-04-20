@@ -1,5 +1,5 @@
 import "../css/login.css";
-
+  {/* This file contains the CustomInput and CustomInputPassword components, which are used to render the input fields in the login and registration page, it will display the error message when there is any error in the input, and also display the icon in the input field */}
 const CustomInput = ({
   Icon,
   label,
@@ -29,7 +29,7 @@ const CustomInput = ({
     </div>
   );
 };
-
+  {/* CustomInputPassword component is used to render the password input field in the login and registration page, it will display the error message when there is any error in the input, and also display the icon in the input field */}
 export const CustomInputPassword = ({
   Icon,
   label,

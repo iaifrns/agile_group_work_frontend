@@ -4,7 +4,7 @@ import "./css/Sidebar.css";
 import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/Group 9.png";
 import { Context } from "../../hooks/useContext";
-
+  {/* Sidebar component is used to render the sidebar on the left side of the page, it will display different menu item based on the student group information in the context, when user click the menu item, it will navigate to the corresponding page */}
 const Menu = ({ menuInfo, active }) => {
   const [display, setDisplay] = useState(false);
   const navigateTo = useNavigate();
@@ -26,7 +26,7 @@ const Menu = ({ menuInfo, active }) => {
     </div>
   );
 };
-
+  {/* Sidebar component is used to render the sidebar on the left side of the page, it will display different menu item based on the student group information in the context, when user click the menu item, it will navigate to the corresponding page */}
 const Sidebar = ({ active }) => {
   const { studentGroups } = useContext(Context);
   const [menu, setMenu] = useState([]);

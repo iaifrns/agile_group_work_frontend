@@ -1,3 +1,4 @@
+  {/* This file contains the DashboardIcon component, which is used to render the dashboard icon in the sidebar, it will display the dashboard icon with the specified color, if no color is specified, it will use the default color */}
 const DashboardIcon = ({ c }) => {
   let color = c ? c : "#5F6388";
   return (

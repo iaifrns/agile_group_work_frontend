@@ -1,3 +1,5 @@
+import React from "react";
+  {/* This file contains the CuateIcon component, which is used to render the cuate icon in the sidebar, it will display the cuate icon with the specified color, if no color is specified, it will use the default color */}
 const CuateIcon = () => {
   return (
     <svg
