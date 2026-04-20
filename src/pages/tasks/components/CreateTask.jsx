@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { responseStatus } from "../../../assets/enum/responseStatus";
 import CloseIcon from "../../../assets/icons/close";
 import Loader from "../../../assets/icons/loader";
@@ -6,8 +6,10 @@ import { TaskPriority, TaskSTatus } from "../../../constants/taskStatus";
 import { stringToColor } from "../../../services/generateColor";
 import "../css/createTask.css";
 import { createTask } from "../services/createTask";
+import { TaskType } from "../../../constants/taskCategory";
 
 const today = new Date().toISOString().split("T")[0];
+
   {/* Component for creating new task, only show when user click the "Create Task" button in GroupTasksPage */}
 const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
   const [studentList, setStudentList] = useState([]);
@@ -39,6 +41,13 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
   const [err, setErr] = useState("");
 
   const [status, setStatus] = useState();
+
+  useEffect(() => {
+    if (type == TaskType.personal) {
+      setStudentList(groupMembers);
+    }
+  }, []);
+
   {/* Handle assign student when click the student in the member list */}
   const handleAssignStudent = (student, ind) => {
     setStudentList([...studentList, student]);
@@ -56,18 +65,25 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
       formData.title.value.length > 0 &&
       studentList.length > 0
     ) {
-      createTask(setStatus, {
-        title: formData.title.value,
-        desc: formData.desc.value,
-        status: formData.status.value,
-        category: formData.priority.value,
-        type: "GROUP",
-        students: studentList.map((i) => {
-          return { id: i.id };
-        }),
-        groupId: gid,
-        dueDate: formData.due.value + 'T'+new Date().toISOString().split("T")[1],
-      }, close, tasks, setTasks);
+      createTask(
+        setStatus,
+        {
+          title: formData.title.value,
+          desc: formData.desc.value,
+          status: formData.status.value,
+          category: formData.priority.value,
+          type: type,
+          students: studentList.map((i) => {
+            return { id: i.id };
+          }),
+          groupId: gid,
+          dueDate:
+            formData.due.value + "T" + new Date().toISOString().split("T")[1],
+        },
+        close,
+        tasks,
+        setTasks,
+      );
     } else if (formData.desc.value.length < 1) {
       setFormData({
         ...formData,
@@ -191,7 +207,7 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
         </div>
         <div className="task-create-form">
           <div className="task-input-label">
-            <p className="task-create-label">Priority:</p>
+            <p className="task-create-label">Category:</p>
             <select
               className="task-create-select"
               value={formData.priority.value}
@@ -225,67 +241,69 @@ const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
             />
           </div>
         </div>
-        <div className="task-create-form">
-          <div className="task-input-label">
-            <p className="task-create-label">Assign:</p>
-            <div className="task-assign-box">
-              <div className="student-assign-container">
-                {studentList.length < 1 ? (
-                  <p>Assign commitment</p>
-                ) : (
-                  <>
-                    {studentList.map((item, ind) => (
-                      <div
-                        className="student-task-choosed"
-                        key={ind + item.email}
-                      >
+        {type == TaskType.group && (
+          <div className="task-create-form">
+            <div className="task-input-label">
+              <p className="task-create-label">Assign:</p>
+              <div className="task-assign-box">
+                <div className="student-assign-container">
+                  {studentList.length < 1 ? (
+                    <p>Assign commitment</p>
+                  ) : (
+                    <>
+                      {studentList.map((item, ind) => (
                         <div
-                          className="student-choosed-avatar"
-                          style={{
-                            backgroundColor: stringToColor(
-                              item.firstName + " " + item.lastName,
-                            ),
-                          }}
+                          className="student-task-choosed"
+                          key={ind + item.email}
                         >
-                          {(item.firstName + item.lastName).slice(0, 2)}
+                          <div
+                            className="student-choosed-avatar"
+                            style={{
+                              backgroundColor: stringToColor(
+                                item.firstName + " " + item.lastName,
+                              ),
+                            }}
+                          >
+                            {(item.firstName + item.lastName).slice(0, 2)}
+                          </div>
+                          <p className="student-task-name">
+                            {item.firstName + " " + item.lastName}
+                          </p>
+                          <div onClick={() => handleRemoveAssign(ind, item)}>
+                            <CloseIcon c={"white"} />
+                          </div>
                         </div>
-                        <p className="student-task-name">
-                          {item.firstName + " " + item.lastName}
-                        </p>
-                        <div onClick={() => handleRemoveAssign(ind, item)}>
-                          <CloseIcon c={"white"} />
-                        </div>
-                      </div>
-                    ))}
-                  </>
-                )}
-              </div>
-              <div className="student-task-list">
-                {memberList.map((item, ind) => (
-                  <div
-                    className="group-member-task"
-                    key={ind + item.email}
-                    onClick={() => handleAssignStudent(item, ind)}
-                  >
+                      ))}
+                    </>
+                  )}
+                </div>
+                <div className="student-task-list">
+                  {memberList.map((item, ind) => (
                     <div
-                      className="student-task-avatar"
-                      style={{
-                        backgroundColor: stringToColor(
-                          item.firstName + " " + item.lastName,
-                        ),
-                      }}
+                      className="group-member-task"
+                      key={ind + item.email}
+                      onClick={() => handleAssignStudent(item, ind)}
                     >
-                      {(item.firstName + item.lastName).slice(0, 2)}
+                      <div
+                        className="student-task-avatar"
+                        style={{
+                          backgroundColor: stringToColor(
+                            item.firstName + " " + item.lastName,
+                          ),
+                        }}
+                      >
+                        {(item.firstName + item.lastName).slice(0, 2)}
+                      </div>
+                      <p className="student-task-name">
+                        {item.firstName + " " + item.lastName}
+                      </p>
                     </div>
-                    <p className="student-task-name">
-                      {item.firstName + " " + item.lastName}
-                    </p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
         <button className="task-create-button" onClick={handleCreateTask}>
           Create Commitment
         </button>

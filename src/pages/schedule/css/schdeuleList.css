@@ -1,0 +1,154 @@
+.schedule-container {
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.schedule-page-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.schedule-page-info .title {
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.schedule-page-info .desc {
+  color: white;
+  font-size: 12px;
+}
+
+.add-schedule-btn {
+  background-color: #5051f9;
+  border: 0px;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.add-schedule-btn:hover {
+  background-color: #272767;
+}
+
+.calendar-container {
+  background: #1e1f25;
+  border-radius: 16px;
+  padding: 20px;
+  width: 100%;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header button {
+  background: #5051f9;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.header button:hover {
+  opacity: 0.8;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+.day-header {
+  text-align: center;
+  font-weight: bold;
+  color: #9ca3af;
+}
+
+.day-cell {
+  background: #2a2b33;
+  border-radius: 12px;
+  padding: 8px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+}
+
+.day-cell:hover {
+  transform: translateY(-2px);
+}
+
+.day-cell.faded {
+  opacity: 0.3;
+}
+
+.day-cell.today {
+  border: 2px solid #5051f9;
+}
+
+.day-number {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 190px;
+  overflow-y: scroll;
+}
+
+.event-card-personal {
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: rgba(80, 81, 249, 0.2);
+  border-left: 3px solid #5051f9;
+}
+
+.event-card-group {
+  padding: 4px 6px;
+  border-radius: 6px;
+  background: rgba(80, 249, 122, 0.2);
+  border-left: 3px solid #50f961;
+}
+
+.event-title {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.event-desc {
+  font-size: 10px;
+  color: #cbd5f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

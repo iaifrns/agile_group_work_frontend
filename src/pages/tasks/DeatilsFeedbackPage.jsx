@@ -21,6 +21,7 @@ import { timeAgo } from "../../services/timedifference";
 import UpdateAssign from "./components/updateAssign";
 import UpdateTaskInfo from "./components/UpdateTask";
 import EditIcon from "../../assets/icons/edit";
+import { TaskType } from "../../constants/taskCategory";
 
 const TaskDetailPage = () => {
   const navigateTo = useNavigate();
@@ -34,7 +35,8 @@ const TaskDetailPage = () => {
   const [comment, setComment] = useState("");
   const [feedbackLoader, setFeedbackLoader] = useState();
   const [showAssignPopup, setShowAssignPopup] = useState(false);
-  const [showUpdateTaskPopup, setShowUpdateTaskPopup] = useState(false)
+  const [showUpdateTaskPopup, setShowUpdateTaskPopup] = useState(false);
+
   {/* Fetch task detail when component is mounted or taskId is changed */}
   useEffect(() => {
     getTaskDetail(setStatus, setTask, taskId);
@@ -75,8 +77,20 @@ const TaskDetailPage = () => {
   }
 
   return (
-    <DashboardLayout active={ActiveSideBarMenu.Task}>
-      {showUpdateTaskPopup && <UpdateTaskInfo task={task} close={()=>setShowUpdateTaskPopup(false)} setTask={setTask} />}
+    <DashboardLayout
+      active={
+        task.type == TaskType.group
+          ? ActiveSideBarMenu.Task
+          : ActiveSideBarMenu.MyCommitment
+      }
+    >
+      {showUpdateTaskPopup && (
+        <UpdateTaskInfo
+          task={task}
+          close={() => setShowUpdateTaskPopup(false)}
+          setTask={setTask}
+        />
+      )}
       {showAssignPopup && (
         <UpdateAssign
           members={task.students}
@@ -124,13 +138,17 @@ const TaskDetailPage = () => {
                   className="drop-down-container"
                   onMouseLeave={() => setShowDropDown(false)}
                 >
-                  {activeGroup.admin == id && (
+                  {(activeGroup.admin == id ||
+                    task.type == TaskType.personal) && (
                     <div className="delete-task" onClick={handleDelete}>
                       <DeleteIcon c={"#d02e2e"} />
                       <p>delete</p>
                     </div>
                   )}
-                  <div className="update-task" onClick={()=>setShowUpdateTaskPopup(true)} >
+                  <div
+                    className="update-task"
+                    onClick={() => setShowUpdateTaskPopup(true)}
+                  >
                     <EditIcon c={"#4242aa"} />
                     <p>Update Task</p>
                   </div>
@@ -263,7 +281,7 @@ const TaskDetailPage = () => {
                 </div>
               ))}
 
-              {activeGroup.admin == id && (
+              {activeGroup.admin == id && task.type == TaskType.group && (
                 <button
                   className="manage-btn"
                   onClick={() => setShowAssignPopup(true)}

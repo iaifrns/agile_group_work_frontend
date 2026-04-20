@@ -1,27 +1,4 @@
-.nav-item {
-  width: 48px;
-  height: 48px;
-  background: transparent;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  color: #72767d;
-  font-size: 20px;
-  text-decoration: none;
-}
 
-.nav-item:hover {
-  background: #2a2d31;
-  color: white;
-}
-
-.nav-item.active {
-  background: #5865f2;
-  color: white;
-}
 
 .main-content {
   flex: 1;

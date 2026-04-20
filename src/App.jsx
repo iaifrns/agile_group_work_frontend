@@ -12,6 +12,9 @@ import RequestListPage from "./pages/groups/RequestListPage";
 import TaskDetailPage from "./pages/tasks/DeatilsFeedbackPage";
 import { io } from "socket.io-client";
 import GroupTasksPage from "./pages/tasks/GroupTaskPage";
+import MyTaskPage from "./pages/tasks/MyTaskPage";
+import SchedulesPage from "./pages/schedule/schedulesPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
 export const socket = io("http://localhost:5001/", { withCredentials: true });
 
@@ -78,6 +81,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <GroupTasksPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/task/my_task_list"
+            element={
+              <ProtectedRoute>
+                <MyTaskPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/schedule"
+            element={
+              <ProtectedRoute>
+                <SchedulesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardPage />
               </ProtectedRoute>
             }
           />

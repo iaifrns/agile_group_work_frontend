@@ -1,0 +1,101 @@
+.dashboard-container {
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dashboard-header .d-title {
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.d-primary-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.d-info-container {
+  padding: 16px;
+  display: flex;
+  width: 300px;
+  border: 1px solid #364153;
+  background-color: #1e2939;
+  border-radius: 8px;
+  gap: 16px;
+  align-items: center;
+}
+
+.d-info-container .d-icon {
+  background-color: #364153;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.d-info-container .d-num {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.d-info-container .d-title {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.d-slide-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.d-slide-header .d-menu-list {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background-color: #1e2939;
+  border-radius: 8px;
+  border: 1px solid #364153;
+}
+
+.d-menu-list .d-menu-btn {
+  padding: 8px;
+  border: 1px solid #364153;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: transparent;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.d-btn {
+  width: 160px;
+  height: fit-content;
+  border: 0px;
+  padding: 12px;
+  border-radius: 8px;
+  color: white;
+  background-color: #5051f9;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.d-btn:hover {
+  background-color: #4949e3;
+}
