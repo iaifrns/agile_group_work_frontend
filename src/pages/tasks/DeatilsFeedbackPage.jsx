@@ -18,7 +18,7 @@ import { createFeedback } from "./services/createFeedback";
 import Loader from "../../assets/icons/loader";
 import AddIcon from "../../assets/icons/add";
 import { timeAgo } from "../../services/timedifference";
-import UpdateAssign from "./components/updateAssign";
+import UpdateAssign from "./components/updateAssign.jsx";
 import UpdateTaskInfo from "./components/UpdateTask";
 import EditIcon from "../../assets/icons/edit";
 import { TaskType } from "../../constants/taskCategory";
@@ -37,12 +37,16 @@ const TaskDetailPage = () => {
   const [showAssignPopup, setShowAssignPopup] = useState(false);
   const [showUpdateTaskPopup, setShowUpdateTaskPopup] = useState(false);
 
-  {/* Fetch task detail when component is mounted or taskId is changed */}
+  {
+    /* Fetch task detail when component is mounted or taskId is changed */
+  }
   useEffect(() => {
     getTaskDetail(setStatus, setTask, taskId);
   }, [taskId]);
-  
-  {/* Filter task list when switch between different task category */}
+
+  {
+    /* Filter task list when switch between different task category */
+  }
   const handleProgress = (progress) => {
     if (progress == TaskSTatus.TODO) {
       return "15%";
@@ -52,15 +56,21 @@ const TaskDetailPage = () => {
       return "100%";
     }
   };
-  {/* Handle delete task */}
+  {
+    /* Handle delete task */
+  }
   const handleDelete = () => {
     deleteTask(setStatus, taskId, navigateTo);
   };
-  {/* Set feedback after create new feedback */}
+  {
+    /* Set feedback after create new feedback */
+  }
   const setFeedback = (feedback) => {
     setTask({ ...task, feedBack: [feedback, ...task.feedBack] });
   };
-  {/* Handle create new feedback */}
+  {
+    /* Handle create new feedback */
+  }
   const handleCreateFeedBack = () => {
     createFeedback(taskId, comment, setFeedbackLoader, setComment, setFeedback);
   };
