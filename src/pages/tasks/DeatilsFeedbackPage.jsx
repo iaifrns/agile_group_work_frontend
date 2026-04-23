@@ -18,7 +18,7 @@ import { createFeedback } from "./services/createFeedback";
 import Loader from "../../assets/icons/loader";
 import AddIcon from "../../assets/icons/add";
 import { timeAgo } from "../../services/timedifference";
-import UpdateAssign from "./components/updateAssign.jsx";
+import UpdateAssign from "./components/UpdateAssign";
 import UpdateTaskInfo from "./components/UpdateTask";
 import EditIcon from "../../assets/icons/edit";
 import { TaskType } from "../../constants/taskCategory";
