@@ -6,7 +6,7 @@ import { responseStatus } from "../../assets/enum/responseStatus";
 import SearchIcon from "../../assets/icons/search";
 import LoaderPage from "../../components/LoaderPage";
 import { Context } from "../../hooks/useContext";
-import "./css/GroupRequest.css";
+import "./css/groupRequest.css";
 import { getAllGroupRequest } from "./services/getAllGroupRequest";
 import ConfirmationPopup from "../../components/ConfirmationPopup";
 import { joinRequestResponse } from "../../constants/requestResponse";
