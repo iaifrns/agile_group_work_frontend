@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import TodoIcon from "../../../assets/icons/TodoIcon";
+import TodoIcon from "../../../assets/icons/todoIcon";
 import DoneIcon from "../../../assets/icons/doneIcon";
 import InProgressIcon from "../../../assets/icons/inProgressIcon";
 import "../css/dTaskList.css";
