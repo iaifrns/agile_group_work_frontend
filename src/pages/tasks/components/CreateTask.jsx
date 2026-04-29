@@ -11,7 +11,7 @@ import { TaskType } from "../../../constants/taskCategory";
 const today = new Date().toISOString().split("T")[0];
 
   {/* Component for creating new task, only show when user click the "Create Task" button in GroupTasksPage */}
-const CreateTask = ({ groupMembers, gid, close, tasks, setTasks }) => {
+const CreateTask = ({ groupMembers, gid, close, tasks, setTasks, type }) => {
   const [studentList, setStudentList] = useState([]);
   const [memberList, setMemberList] = useState(groupMembers);
 
