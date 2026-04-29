@@ -39,7 +39,7 @@ const DashboardPage = () => {
       icon: TaskIcon,
     },
     shedule: {
-      title: "Upcooming Schedules",
+      title: "Upcoming Schedules",
       num: 0,
       icon: ComitmentIcon,
     },
