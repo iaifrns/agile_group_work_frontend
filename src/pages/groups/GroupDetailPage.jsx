@@ -137,7 +137,7 @@ const GroupDetailPage = () => {
 
             <div className="info-row">
               <span className="info-label">Created Date</span>
-              <span className="info-value">{Date(groupDetail.createdAt)}</span>
+              <span className="info-value">{groupDetail.createdAt.replace('T',' ')}</span>
             </div>
 
             <div className="info-row">
